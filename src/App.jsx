@@ -1,8 +1,8 @@
-import { useState } from 'react'
+
 import './App.css'
 import "./assets/fonts/fonts.css";
-import LeftPart from './components/leftPart';
-import RightPart from './components/RightPart';
+import LeftPart from './components/leftPart.jsx';
+import RightPart from './components/RightPart.jsx';
 
 function App() {
 
