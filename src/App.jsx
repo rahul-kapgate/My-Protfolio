@@ -1,8 +1,8 @@
 
 import './App.css'
 import "./assets/fonts/fonts.css";
-import LeftPart from './components/leftPart.jsx';
-import RightPart from './components/RightPart.jsx';
+import LeftPart from './components/LeftPart.jsx';
+import RightPart from './components/RightPart';
 
 function App() {
 
