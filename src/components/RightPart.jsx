@@ -78,46 +78,11 @@ As a Full Stack Developer, I actively contribute to multiple projects, ensuring 
       </div>
 
 
-      <div className="lg:-ml-40 flex flex-col md:flex-row rounded-lg shadow-lg mt-1 lg:mt-20 pr-3">
-        <div className="text-xs mt-8 px-3 text-gray-400">OCT 23 — MAR 24</div>
-        <div className="bg-custom text-white p-6 max-w-md w-full">
-          <div className="flex justify-between items-center">
-            <h3 className="text-xl font-semibold text-gray-300">
-              Frontend Engineer, Intern
-            </h3>
-          </div>
-          <p className="text-sm text-teal-400 mt-2">
-            Bliinc Innovations Pvt. Ltd. , Nagpur
-          </p>
-          <p className="mt-4 text-slate-400 text-sm lg:text-sm">
-            Developed a Patient Management System for healthcare providers to
-            access previous patient information efficiently. Optimized
-            processes, achieving a 40% reduction in data retrieval time.
-            <br />
-            Collaborated with cross-functional teams to design and implement
-            scalable features. Contributed to improving the system's user
-            interface for better accessibility.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <span className="bg-teal-600 text-xs px-3 py-1 rounded-full">
-              JavaScript
-            </span>
-            <span className="bg-teal-600 text-xs px-3 py-1 rounded-full">
-              Tailwind
-            </span>
-            <span className="bg-teal-600 text-xs px-3 py-1 rounded-full">
-              HTML
-            </span>
-            <span className="bg-teal-600 text-xs px-3 py-1 rounded-full">
-              CSS
-            </span>
-          </div>
-        </div>
-      </div>
+      
 
 
       <div className="lg:-ml-40 flex flex-col md:flex-row rounded-lg shadow-lg mt-1 lg:mt-5 pr-3">
-        <div className="text-xs mt-8 px-3 text-gray-400">APR 24 — SEPT 24</div>
+        <div className="text-xs mt-8 px-3 text-gray-400">July 24 — SEPT 24</div>
         <div className="bg-custom text-white p-6 max-w-md w-full">
           <div className="flex justify-between items-center">
             <h3 className="text-xl font-semibold text-gray-300">
