@@ -153,29 +153,30 @@ export default function Home() {
                     </div>
                 </section>
 
-                {/* EXPERIENCE SECTION – LINKEDIN STYLE TIMELINE */}
+                {/* EXPERIENCE SECTION – LINKEDIN STYLE TIMELINE, MOBILE-FRIENDLY */}
                 <section id="experience" className="space-y-6">
                     <div>
                         <h3 className="text-xl sm:text-2xl font-semibold text-slate-50">
                             Experience
                         </h3>
                         <p className="mt-2 text-sm text-slate-400">
-                            A quick look at where I&apos;ve been learning, building, and
-                            shipping.
+                            A quick look at where I&apos;ve been learning, building, and shipping.
                         </p>
                     </div>
 
-                    <div className="space-y-8">
+                    <div className="space-y-6">
                         {/* SirpiDataScience */}
-                        <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-5 sm:p-6">
-                            {/* Company row */}
-                            <div className="flex items-start gap-4">
-                                {/* Placeholder logo circle */}
-                                <div className="mt-1 h-10 w-10 rounded-xl bg-slate-800 flex items-center justify-center text-xs font-semibold text-slate-200">
+                        <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-4 sm:p-5">
+                            <div className="flex gap-3">
+                                {/* Logo */}
+                                <div className="mt-1 h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-slate-800 flex items-center justify-center text-[11px] sm:text-xs font-semibold text-slate-200">
                                     S
                                 </div>
+
+                                {/* Content */}
                                 <div className="flex-1">
-                                    <div className="flex flex-wrap items-center justify-between gap-2">
+                                    {/* Company + tags */}
+                                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
                                         <div>
                                             <a
                                                 href="https://www.sirpi.io/"
@@ -185,71 +186,68 @@ export default function Home() {
                                             >
                                                 SirpiDataScience
                                             </a>
-                                            <p className="text-xs text-slate-400 mt-0.5">
+                                            <p className="text-[11px] sm:text-xs text-slate-400 mt-0.5">
                                                 Full-time · 11 mos · Bengaluru, Karnataka, India · On-site
                                             </p>
                                         </div>
-                                        <div className="flex flex-col items-end gap-1">
-                                            <span className="text-[11px] rounded-full border border-slate-700 px-3 py-1 text-slate-300">
+
+                                        <div className="flex flex-wrap gap-1 sm:gap-2 sm:justify-end">
+                                            <span className="text-[10px] sm:text-[11px] rounded-full border border-slate-700 px-2.5 py-1 text-slate-300">
                                                 React.js · FastAPI · Full Stack
                                             </span>
                                             <a
                                                 href="https://www.sirpi.io/"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="text-[11px] text-indigo-300 hover:text-indigo-200 underline-offset-2 hover:underline"
+                                                className="text-[10px] sm:text-[11px] text-indigo-300 hover:text-indigo-200 underline-offset-2 hover:underline"
                                             >
                                                 Visit website ↗
                                             </a>
                                         </div>
                                     </div>
 
-                                    {/* Timeline for roles */}
-                                    <div className="mt-4 space-y-4">
+                                    {/* Timeline roles */}
+                                    <div className="mt-4 space-y-3">
                                         {/* Role 1 */}
                                         <div className="flex gap-3">
                                             {/* Dot + line */}
-                                            <div className="flex flex-col items-center">
-                                                <span className="h-2.5 w-2.5 rounded-full bg-slate-300" />
-                                                <span className="mt-1 w-px flex-1 bg-slate-700" />
+                                            <div className="flex flex-col items-center pt-1">
+                                                <span className="h-2 w-2 rounded-full bg-slate-300" />
+                                                <span className="mt-1 w-px flex-1 bg-slate-700 hidden sm:block" />
                                             </div>
 
-                                            {/* Content */}
+                                            {/* Text */}
                                             <div className="flex-1">
                                                 <h5 className="text-sm font-semibold text-slate-100">
                                                     Full Stack Developer
                                                 </h5>
-                                                <p className="text-xs text-slate-400 mt-0.5">
+                                                <p className="text-[11px] text-slate-400 mt-0.5">
                                                     Jun 2025 – Present · 6 mos
                                                 </p>
                                                 <p className="text-xs sm:text-sm text-slate-400 mt-1.5 leading-relaxed">
                                                     Working across frontend and backend to build internal tools,
-                                                    dashboards, and data-heavy workflows using React, FastAPI, and
-                                                    modern cloud services.
+                                                    dashboards, and data-heavy workflows using React, FastAPI,
+                                                    and modern cloud services.
                                                 </p>
                                             </div>
                                         </div>
 
                                         {/* Role 2 */}
                                         <div className="flex gap-3">
-                                            {/* Dot without extending line down */}
-                                            <div className="flex flex-col items-center">
-                                                <span className="h-2.5 w-2.5 rounded-full bg-slate-500" />
-                                                <span className="mt-1 w-px flex-1 bg-transparent" />
+                                            <div className="flex flex-col items-center pt-1">
+                                                <span className="h-2 w-2 rounded-full bg-slate-500" />
                                             </div>
-
-                                            {/* Content */}
                                             <div className="flex-1">
                                                 <h5 className="text-sm font-semibold text-slate-100">
                                                     Full Stack Developer Intern
                                                 </h5>
-                                                <p className="text-xs text-slate-400 mt-0.5">
+                                                <p className="text-[11px] text-slate-400 mt-0.5">
                                                     Jan 2025 – Jun 2025 · 6 mos
                                                 </p>
                                                 <p className="text-xs sm:text-sm text-slate-400 mt-1.5 leading-relaxed">
-                                                    Contributed to features in existing products, fixed bugs, and
-                                                    gained hands-on experience with real-world production code, APIs,
-                                                    and deployment workflows.
+                                                    Contributed to features in existing products, fixed bugs,
+                                                    and gained hands-on experience with real-world production
+                                                    code, APIs, and deployment workflows.
                                                 </p>
                                             </div>
                                         </div>
@@ -258,16 +256,17 @@ export default function Home() {
                             </div>
                         </div>
 
-
                         {/* Micropro Software Solutions Limited */}
-                        <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-5 sm:p-6">
-                            <div className="flex items-start gap-4">
-                                {/* Placeholder logo circle */}
-                                <div className="mt-1 h-10 w-10 rounded-xl bg-slate-800 flex items-center justify-center text-xs font-semibold text-slate-200">
+                        <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-4 sm:p-5">
+                            <div className="flex gap-3">
+                                {/* Logo */}
+                                <div className="mt-1 h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-slate-800 flex items-center justify-center text-[11px] sm:text-xs font-semibold text-slate-200">
                                     M
                                 </div>
+
+                                {/* Content */}
                                 <div className="flex-1">
-                                    <div className="flex flex-wrap items-center justify-between gap-2">
+                                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
                                         <div>
                                             <a
                                                 href="https://www.microproindia.com/"
@@ -277,22 +276,24 @@ export default function Home() {
                                             >
                                                 System Administrator
                                             </a>
-                                            <p className="text-xs text-slate-400 mt-0.5">
+                                            <p className="text-[11px] sm:text-xs text-slate-400 mt-0.5">
                                                 Micropro Software Solutions Limited · Internship
                                             </p>
-                                            <p className="text-xs text-slate-500">
-                                                Jul 2024 – Sep 2024 · 3 mos · Nagpur, Maharashtra, India · On-site
+                                            <p className="text-[11px] text-slate-500">
+                                                Jul 2024 – Sep 2024 · 3 mos · Nagpur, Maharashtra, India ·
+                                                On-site
                                             </p>
                                         </div>
-                                        <div className="flex flex-col items-end gap-1">
-                                            <span className="text-[11px] rounded-full border border-slate-700 px-3 py-1 text-slate-300">
+
+                                        <div className="flex flex-wrap gap-1 sm:gap-2 sm:justify-end">
+                                            <span className="text-[10px] sm:text-[11px] rounded-full border border-slate-700 px-2.5 py-1 text-slate-300">
                                                 Computer Networking · Linux
                                             </span>
                                             <a
                                                 href="https://www.microproindia.com/"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="text-[11px] text-indigo-300 hover:text-indigo-200 underline-offset-2 hover:underline"
+                                                className="text-[10px] sm:text-[11px] text-indigo-300 hover:text-indigo-200 underline-offset-2 hover:underline"
                                             >
                                                 Visit website ↗
                                             </a>
@@ -301,15 +302,16 @@ export default function Home() {
 
                                     <p className="mt-3 text-xs sm:text-sm text-slate-400 leading-relaxed">
                                         Worked on system administration tasks, basic networking, and
-                                        troubleshooting. This experience gave me a strong foundation in how
-                                        infrastructure and operating systems behave under real workloads.
+                                        troubleshooting. This experience gave me a strong foundation in
+                                        how infrastructure and operating systems behave under real
+                                        workloads.
                                     </p>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </section>
+
 
                 {/* PROJECTS SECTION */}
                 <section id="projects" className="space-y-6">
