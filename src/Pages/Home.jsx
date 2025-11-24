@@ -7,6 +7,7 @@ import {
   faLinkedin,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
+import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 
 export default function Home() {
   const [theme, setTheme] = useState("dark");
@@ -79,14 +80,15 @@ export default function Home() {
               onClick={toggleTheme}
               className="flex items-center gap-2 rounded-full border border-slate-300 bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-200 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 transition-colors"
             >
-              <span
-                className={`inline-block h-4 w-4 rounded-full ${
+              <FontAwesomeIcon
+                icon={theme === "dark" ? faMoon : faSun}
+                className={
                   theme === "dark"
-                    ? "bg-yellow-400"
-                    : "bg-slate-800"
-                }`}
+                    ? "text-yellow-400"
+                    : "text-slate-900"
+                }
               />
-              <span>{theme === "dark" ? "Dark" : "Light"} mode</span>
+              <span>{theme === "dark" ? "Dark mode" : "Light mode"}</span>
             </button>
           </div>
         </div>
@@ -113,9 +115,15 @@ export default function Home() {
               </span>{" "}
               — a dedicated platform for MAH AAC CET aspirants. I love working
               with <span className="text-slate-900 dark:text-slate-200">React</span>,{" "}
-              <span className="text-slate-900 dark:text-slate-200">Node / FastAPI</span>, and{" "}
-              <span className="text-slate-900 dark:text-slate-200">modern web tools</span> to craft
-              products that feel fast, polished, and thoughtfully designed.
+              <span className="text-slate-900 dark:text-slate-200">
+                Node / FastAPI
+              </span>
+              , and{" "}
+              <span className="text-slate-900 dark:text-slate-200">
+                modern web tools
+              </span>{" "}
+              to craft products that feel fast, polished, and thoughtfully
+              designed.
             </p>
 
             {/* CTA Buttons */}
@@ -195,9 +203,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* EXPERIENCE SECTION – as you already have, just add light/dark classes if you want */}
-        {/* (Keeping your existing experience + projects code, since structure is fine) */}
-
         {/* EXPERIENCE SECTION */}
         <section id="experience" className="space-y-6">
           <div>
@@ -212,11 +217,6 @@ export default function Home() {
           <div className="space-y-6">
             {/* SirpiDataScience */}
             <div className="rounded-2xl border border-slate-200 bg-white/80 p-4 sm:p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/40 dark:shadow-none transition-colors">
-              {/* ... keep the inner content exactly as in your latest version ... */}
-              {/* I’m not rewriting all of it to avoid noise, your content is fine. */}
-              {/* Just make sure inner texts use text-slate-600/900 with dark: variants like above. */}
-              {/* Paste your Sirpi + Micropro code here unchanged, or tweak colors similarly if you like. */}
-              {/* ---------- START OF SIRPI BLOCK ---------- */}
               <div className="flex gap-3">
                 <div className="mt-1 h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-slate-800 flex items-center justify-center text-[11px] sm:text-xs font-semibold text-slate-200">
                   S
@@ -293,7 +293,6 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              {/* ---------- END OF SIRPI BLOCK ---------- */}
             </div>
 
             {/* Micropro card */}
@@ -406,7 +405,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* You can add another project card here later if you want */}
+            {/* Additional project cards can go here */}
           </div>
         </section>
       </main>
