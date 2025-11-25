@@ -336,10 +336,6 @@ export default function Home() {
           </div>
         </section>
 
-
-        <GithubProfileSection defaultUsername="rahul-kapgate" />
-
-
         {/* EXPERIENCE SECTION */}
         <section id="experience" className="space-y-6">
           <div>
@@ -481,6 +477,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+         {/* GitHub snapshot (with input) */}
+         <GithubProfileSection defaultUsername="rahul-kapgate" />
 
         {/* NASA APOD SECTION – nice visual break between Experience & Projects */}
         <section className="space-y-4">
