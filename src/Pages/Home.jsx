@@ -9,6 +9,7 @@ import {
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
+import GithubProfileSection from "../components/GithubProfileSection";
 
 export default function Home() {
   const [theme, setTheme] = useState("dark");
@@ -334,6 +335,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+
+        <GithubProfileSection defaultUsername="rahul-kapgate" />
 
 
         {/* EXPERIENCE SECTION */}
