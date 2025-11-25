@@ -1,3 +1,4 @@
+// src/pages/Home.jsx
 import React, { useEffect, useState } from "react";
 import "../App.css";
 import "../assets/fonts/fonts.css";
@@ -12,6 +13,10 @@ import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 export default function Home() {
   const [theme, setTheme] = useState("dark");
 
+  const [apodData, setApodData] = useState(null);
+  const [apodLoading, setApodLoading] = useState(true);
+  const [apodError, setApodError] = useState("");
+
   useEffect(() => {
     const saved = localStorage.getItem("theme") || "dark";
     setTheme(saved);
@@ -20,6 +25,32 @@ export default function Home() {
     } else {
       document.documentElement.classList.remove("dark");
     }
+  }, []);
+
+  useEffect(() => {
+    const fetchApod = async () => {
+      try {
+        setApodLoading(true);
+        setApodError("");
+        const res = await fetch(
+          "https://api.nasa.gov/planetary/apod?api_key=3qtzEDG1tFeKF2sI71I6VJ9h0tbeXWwLZd2REy6Z"
+        );
+
+        if (!res.ok) {
+          throw new Error(`Request failed with status ${res.status}`);
+        }
+
+        const data = await res.json();
+        setApodData(data);
+      } catch (err) {
+        console.error(err);
+        setApodError("Unable to load NASA Astronomy Picture of the Day right now.");
+      } finally {
+        setApodLoading(false);
+      }
+    };
+
+    fetchApod();
   }, []);
 
   const toggleTheme = () => {
@@ -83,9 +114,7 @@ export default function Home() {
               <FontAwesomeIcon
                 icon={theme === "dark" ? faMoon : faSun}
                 className={
-                  theme === "dark"
-                    ? "text-yellow-400"
-                    : "text-slate-900"
+                  theme === "dark" ? "text-yellow-400" : "text-slate-900"
                 }
               />
               <span>{theme === "dark" ? "Dark mode" : "Light mode"}</span>
@@ -342,6 +371,82 @@ export default function Home() {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* NASA APOD SECTION – nice visual break between Experience & Projects */}
+        <section className="space-y-4">
+          <h3 className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-slate-50">
+            Space Break: NASA Astronomy Picture of the Day 🚀
+          </h3>
+
+          <div className="rounded-2xl border border-slate-200 bg-white/80 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/40 dark:shadow-none transition-colors">
+            {apodLoading && (
+              <p className="text-sm text-slate-500 dark:text-slate-400">
+                Loading today&apos;s space picture...
+              </p>
+            )}
+
+            {!apodLoading && apodError && (
+              <p className="text-sm text-red-500">{apodError}</p>
+            )}
+
+            {!apodLoading && !apodError && apodData && (
+              <div className="space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
+                  <h4 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+                    {apodData.title}
+                  </h4>
+                  {apodData.date && (
+                    <span className="text-xs text-slate-500 dark:text-slate-400">
+                      {apodData.date}
+                    </span>
+                  )}
+                </div>
+
+                {apodData.media_type === "image" && (
+                  <div className="mt-2 overflow-hidden rounded-xl border border-slate-200/70 dark:border-slate-700/70">
+                    <img
+                      src={apodData.url}
+                      alt={apodData.title}
+                      className="w-full max-h-[400px] object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
+
+                {apodData.media_type === "video" && (
+                  <div className="mt-2 overflow-hidden rounded-xl aspect-video">
+                    <iframe
+                      src={apodData.url}
+                      title={apodData.title}
+                      className="w-full h-full"
+                      allowFullScreen
+                    />
+                  </div>
+                )}
+
+                {apodData.explanation && (
+                  <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                    {apodData.explanation}
+                  </p>
+                )}
+
+                {apodData.copyright && (
+                  <p className="mt-1 text-[11px] text-slate-500 dark:text-slate-500">
+                    © {apodData.copyright} · Data from{" "}
+                    <a
+                      href="https://api.nasa.gov/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline underline-offset-2 hover:text-indigo-600 dark:hover:text-indigo-300"
+                    >
+                      NASA Open APIs
+                    </a>
+                  </p>
+                )}
+              </div>
+            )}
           </div>
         </section>
 
