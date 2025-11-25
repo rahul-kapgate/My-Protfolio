@@ -72,6 +72,34 @@ export default function Home() {
     { name: "Supabase", emoji: "🧪", note: "Auth, storage, Postgres as a service" },
     { name: "Tailwind CSS", emoji: "🎨", note: "Fast UI styling" },
     { name: "TypeScript", emoji: "🔷", note: "Type-safe React & APIs" },
+    { name: "shadcn/ui", emoji: "🧩", note: "Composable React UI components" },
+  ];
+
+  const featureFlow = [
+    {
+      title: "1. Understand the problem",
+      subtitle: "Talk to people & read context",
+      detail: "Clarify the why before touching code – requirements, constraints, and success criteria.",
+      tags: ["Calls / chats", "Product docs"],
+    },
+    {
+      title: "2. Sketch the solution",
+      subtitle: "Flows, rough UI, data shapes",
+      detail: "Quick wireframes and data models to see how the feature fits into existing systems.",
+      tags: ["Figma / pen & paper", "ERDs"],
+    },
+    {
+      title: "3. Build iteratively",
+      subtitle: "Backend + frontend slices",
+      detail: "Ship vertical slices: API, UI, and state together so the feature is testable end-to-end.",
+      tags: ["React", "FastAPI / Node", "PostgreSQL"],
+    },
+    {
+      title: "4. Ship & refine",
+      subtitle: "Review, deploy, iterate",
+      detail: "Code review, deploy, then improve based on usage, edge cases, and feedback.",
+      tags: ["Code review", "Monitoring", "User feedback"],
+    },
   ];
 
 
@@ -249,6 +277,64 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* HOW I SHIP A FEATURE */}
+        <section className="space-y-4">
+          <div>
+            <h3 className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-slate-50">
+              How I ship a feature
+            </h3>
+            <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 max-w-2xl">
+              From problem to production: a simple flow I follow when building things like
+              Artistic Vickey, internal tools, and dashboards.
+            </p>
+          </div>
+
+          <div className="relative">
+            {/* Connecting line on desktop */}
+            <div className="hidden md:block absolute inset-x-4 top-8 h-px bg-slate-200 dark:bg-slate-700" />
+
+            <div className="grid gap-4 md:grid-cols-4">
+              {featureFlow.map((step) => (
+                <div
+                  key={step.title}
+                  className="relative rounded-2xl border border-slate-200 bg-white/80 p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/40 dark:shadow-none"
+                >
+                  {/* Step dot (for desktop line) */}
+                  <div className="hidden md:flex absolute -top-3 left-1/2 -translate-x-1/2 h-6 w-6 items-center justify-center">
+                    <span className="h-2.5 w-2.5 rounded-full bg-indigo-500 shadow-[0_0_0_4px_rgba(99,102,241,0.25)]" />
+                  </div>
+
+                  <div className="space-y-1">
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-indigo-500 dark:text-indigo-400">
+                      {step.subtitle}
+                    </p>
+                    <h4 className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+                      {step.title}
+                    </h4>
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                      {step.detail}
+                    </p>
+                  </div>
+
+                  {step.tags && (
+                    <div className="mt-3 flex flex-wrap gap-1.5">
+                      {step.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-[10px] font-medium text-slate-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
 
         {/* EXPERIENCE SECTION */}
         <section id="experience" className="space-y-6">
