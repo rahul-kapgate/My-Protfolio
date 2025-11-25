@@ -20,3 +20,34 @@ body,
 }
 
 
+/* --- Subtle floating animation for cards --- */
+@keyframes rk-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.rk-animate-float {
+  animation: rk-float 6s ease-in-out infinite;
+}
+
+/* --- Soft pulsing halo for avatar --- */
+@keyframes rk-avatar-glow {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.12);
+  }
+}
+
+.rk-avatar-glow {
+  animation: rk-avatar-glow 5s ease-in-out infinite;
+}
+
+

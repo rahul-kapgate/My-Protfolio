@@ -64,6 +64,17 @@ export default function Home() {
     }
   };
 
+  const techStack = [
+    { name: "React", emoji: "⚛️", note: "SPA, dashboards, component systems" },
+    { name: "FastAPI", emoji: "⚡", note: "Backend APIs & services" },
+    { name: "Node.js", emoji: "🟢", note: "APIs, scripting, tooling" },
+    { name: "PostgreSQL", emoji: "🐘", note: "Relational data & analytics" },
+    { name: "Supabase", emoji: "🧪", note: "Auth, storage, Postgres as a service" },
+    { name: "Tailwind CSS", emoji: "🎨", note: "Fast UI styling" },
+    { name: "TypeScript", emoji: "🔷", note: "Type-safe React & APIs" },
+  ];
+
+
   return (
     <div className="min-h-screen font-custom bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
       {/* Top Navbar */}
@@ -71,7 +82,12 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
           {/* Logo / Name */}
           <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500" />
+            <div className="relative h-8 w-8">
+              {/* Glow halo */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 blur-md rk-avatar-glow" />
+              {/* Main avatar circle */}
+              <div className="relative h-8 w-8 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500" />
+            </div>
             <div>
               <h1 className="text-sm font-semibold tracking-tight text-slate-900 dark:text-slate-100">
                 Rahul Kapgate
@@ -81,6 +97,7 @@ export default function Home() {
               </p>
             </div>
           </div>
+
 
           <div className="flex items-center gap-4">
             {/* Nav Links */}
@@ -205,7 +222,8 @@ export default function Home() {
 
           {/* Hero side card focusing Artistic Vickey */}
           <div className="hidden md:block">
-            <div className="relative h-64 rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-100 via-slate-50 to-slate-100 overflow-hidden dark:border-slate-800 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 transition-colors">
+            <div className="relative h-64 rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-100 via-slate-50 to-slate-100 overflow-hidden dark:border-slate-800 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 transition-colors rk-animate-float">
+
               <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 blur-2xl opacity-60" />
               <div className="absolute inset-x-6 bottom-6 space-y-3">
                 <p className="text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
@@ -449,6 +467,43 @@ export default function Home() {
             )}
           </div>
         </section>
+
+        {/* TECH STACK ORBIT SECTION */}
+        <section className="space-y-4">
+          <div>
+            <h3 className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-slate-50">
+              Tech I enjoy working with
+            </h3>
+            <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 max-w-2xl">
+              Tools I reach for when building platforms like Artistic Vickey,
+              internal dashboards, and data-heavy workflows.
+            </p>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2">
+            {techStack.map((item) => (
+              <div
+                key={item.name}
+                className="group rounded-2xl border border-slate-200 bg-white/80 px-4 py-3 shadow-sm hover:shadow-md transition-all dark:border-slate-800 dark:bg-slate-900/40"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 text-lg group-hover:scale-105 transition-transform dark:bg-slate-800">
+                    <span>{item.emoji}</span>
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+                      {item.name}
+                    </p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                      {item.note}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
 
         {/* PROJECTS SECTION */}
         <section id="projects" className="space-y-6">
