@@ -65,15 +65,85 @@ export default function Home() {
     }
   };
 
-  const techStack = [
-    { name: "React", emoji: "⚛️", note: "SPA, dashboards, component systems" },
-    { name: "FastAPI", emoji: "⚡", note: "Backend APIs & services" },
-    { name: "Node.js", emoji: "🟢", note: "APIs, scripting, tooling" },
-    { name: "PostgreSQL", emoji: "🐘", note: "Relational data & analytics" },
-    { name: "Supabase", emoji: "🧪", note: "Auth, storage, Postgres as a service" },
-    { name: "Tailwind CSS", emoji: "🎨", note: "Fast UI styling" },
-    { name: "TypeScript", emoji: "🔷", note: "Type-safe React & APIs" },
-    { name: "shadcn/ui", emoji: "🧩", note: "Composable React UI components" },
+  const techSections = [
+    {
+      label: "Frontend",
+      blurb: "Building fast, responsive UI with modern React tooling.",
+      items: [
+        { name: "Next.js", emoji: "⚡", note: "Full-stack React framework" },
+        { name: "React", emoji: "⚛️", note: "Component-driven UIs" },
+        { name: "TypeScript", emoji: "🔷", note: "Type-safe frontend logic" },
+        { name: "JavaScript (ES6+)", emoji: "📜", note: "Core language of the web" },
+        { name: "Tailwind CSS", emoji: "🎨", note: "Utility-first styling" },
+        { name: "HTML & CSS", emoji: "🧱", note: "Semantic layouts & responsive design" },
+      ],
+    },
+    {
+      label: "Backend & APIs",
+      blurb: "Designing clean, predictable APIs and backend services.",
+      items: [
+        { name: "Python", emoji: "🐍", note: "Scripting, services, automation" },
+        { name: "FastAPI", emoji: "⚡", note: "High-performance web APIs" },
+        { name: "Node.js", emoji: "🟢", note: "APIs, workers, tooling" },
+        { name: "Express.js", emoji: "🛣️", note: "Minimal and flexible HTTP server" },
+      ],
+    },
+    {
+      label: "Auth",
+      blurb: "Keeping user data safe with battle-tested auth patterns.",
+      items: [
+        { name: "JWT", emoji: "🔐", note: "Token-based authentication" },
+        { name: "Auth0", emoji: "🛡️", note: "Hosted identity & auth flows" },
+      ],
+    },
+    {
+      label: "Database",
+      blurb: "Modeling data for real products and exam-style workflows.",
+      items: [
+        { name: "MongoDB", emoji: "🍃", note: "Document store for flexible data" },
+        { name: "Supabase", emoji: "🧪", note: "Postgres, auth & APIs" },
+        { name: "SQL / PostgreSQL", emoji: "🐘", note: "Relational data & constraints" },
+      ],
+    },
+    {
+      label: "Tools & Editors",
+      blurb: "Day-to-day tools that keep my workflow fast and focused.",
+      items: [
+        { name: "Git & GitHub", emoji: "🌱", note: "Version control & collaboration" },
+        { name: "Postman", emoji: "📮", note: "API testing & debugging" },
+        { name: "Figma", emoji: "🎨", note: "UI/UX design & prototyping" },
+        { name: "VS Code", emoji: "🧩", note: "Primary code editor" },
+        { name: "Cursor", emoji: "🧠", note: "AI-assisted coding" },
+        { name: "Windsurf", emoji: "🌊", note: "IDE tuned for AI workflows" },
+      ],
+    },
+    {
+      label: "Services & Hosting",
+      blurb: "Sending emails and getting apps live on the internet.",
+      items: [
+        { name: "Resend", emoji: "✉️", note: "Transactional email for apps" },
+        { name: "Netlify", emoji: "☁️", note: "Static & JAMstack hosting" },
+        { name: "Render", emoji: "🚀", note: "Backend & service hosting" },
+        { name: "Backblaze B2", emoji: "💾", note: "Object storage for assets" },
+      ],
+    },
+    {
+      label: "Cloud & Storage",
+      blurb: "Serving and optimizing media for real users.",
+      items: [
+        { name: "Cloudinary", emoji: "🌥️", note: "Media optimization & delivery" },
+        { name: "Supabase Storage", emoji: "📂", note: "Bucket storage for files" },
+      ],
+    },
+    {
+      label: "Systems & DevOps",
+      blurb: "Understanding the layers below the app: OS, network, containers.",
+      items: [
+        { name: "Linux", emoji: "🐧", note: "Day-to-day dev environment & servers" },
+        { name: "Networking basics", emoji: "🌐", note: "HTTP, DNS, routing, tooling" },
+        { name: "Docker", emoji: "🐳", note: "Containerized dev & deployment" },
+      ],
+    },
   ];
 
   const featureFlow = [
@@ -478,8 +548,8 @@ export default function Home() {
           </div>
         </section>
 
-         {/* GitHub snapshot (with input) */}
-         <GithubProfileSection defaultUsername="rahul-kapgate" />
+        {/* GitHub snapshot (with input) */}
+        <GithubProfileSection defaultUsername="rahul-kapgate" />
 
         {/* NASA APOD SECTION – nice visual break between Experience & Projects */}
         <section className="space-y-4">
@@ -557,41 +627,72 @@ export default function Home() {
           </div>
         </section>
 
-        {/* TECH STACK ORBIT SECTION */}
-        <section className="space-y-4">
+
+                {/* TECH STACK – PINTEREST / MASONRY STYLE */}
+                <section className="space-y-4">
           <div>
             <h3 className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-slate-50">
               Tech I enjoy working with
             </h3>
             <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 max-w-2xl">
-              Tools I reach for when building platforms like Artistic Vickey,
+              The tools I reach for when building platforms like Artistic Vickey,
               internal dashboards, and data-heavy workflows.
             </p>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2">
-            {techStack.map((item) => (
+          {/* Masonry-style columns */}
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+            {techSections.map((section) => (
               <div
-                key={item.name}
-                className="group rounded-2xl border border-slate-200 bg-white/80 px-4 py-3 shadow-sm hover:shadow-md transition-all dark:border-slate-800 dark:bg-slate-900/40"
+                key={section.label}
+                style={{ breakInside: "avoid" }}
+                className="mb-4 rounded-3xl border border-slate-200 bg-white/80 p-4 sm:p-5 shadow-sm
+                           hover:shadow-md hover:-translate-y-0.5 transition-all
+                           dark:border-slate-800 dark:bg-slate-900/40 dark:shadow-none"
               >
-                <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 text-lg group-hover:scale-105 transition-transform dark:bg-slate-800">
-                    <span>{item.emoji}</span>
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
-                      {item.name}
-                    </p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                      {item.note}
-                    </p>
-                  </div>
+                <div className="flex items-baseline justify-between gap-2 mb-2">
+                  <h4 className="text-sm sm:text-base font-semibold text-slate-900 dark:text-slate-100">
+                    {section.label}
+                  </h4>
+                  <span className="text-[10px] sm:text-xs rounded-full border border-slate-200 px-2 py-0.5 text-slate-500 dark:border-slate-700 dark:text-slate-400">
+                    {section.items.length} tools
+                  </span>
+                </div>
+
+                {section.blurb && (
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+                    {section.blurb}
+                  </p>
+                )}
+
+                <div className="space-y-2">
+                  {section.items.map((item) => (
+                    <div
+                      key={item.name}
+                      className="group flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50/80 px-3 py-2
+                                 hover:border-indigo-300 hover:bg-indigo-50/80 transition-all
+                                 dark:border-slate-700 dark:bg-slate-900/60 dark:hover:border-indigo-500/70 dark:hover:bg-slate-900"
+                    >
+                      <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-white text-lg shadow-sm
+                                      group-hover:scale-105 transition-transform dark:bg-slate-800">
+                        <span>{item.emoji}</span>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-xs sm:text-sm font-medium text-slate-900 dark:text-slate-100">
+                          {item.name}
+                        </p>
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                          {item.note}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}
           </div>
         </section>
+
 
 
         {/* PROJECTS SECTION */}
