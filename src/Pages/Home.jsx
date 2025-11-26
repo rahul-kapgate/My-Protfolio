@@ -65,6 +65,45 @@ export default function Home() {
     }
   };
 
+
+  // ----- Experience date helpers -----
+  const formatMonthYear = (date) =>
+    date.toLocaleString("en-US", { month: "short", year: "numeric" });
+
+  const formatDuration = (start, end) => {
+    let months =
+      (end.getFullYear() - start.getFullYear()) * 12 +
+      (end.getMonth() - start.getMonth()) +
+      1; // +1 so Jan–Jun = 6 mos
+
+    if (months < 1) months = 1;
+
+    const years = Math.floor(months / 12);
+    const remainingMonths = months % 12;
+
+    const parts = [];
+    if (years > 0) {
+      parts.push(`${years} yr${years > 1 ? "s" : ""}`);
+    }
+    if (remainingMonths > 0) {
+      parts.push(`${remainingMonths} mo${remainingMonths > 1 ? "s" : ""}`);
+    }
+
+    return parts.join(" ");
+  };
+
+  const formatDateRange = (startStr, endStr = null) => {
+    const start = new Date(startStr);
+    const end = endStr ? new Date(endStr) : new Date();
+
+    const fromLabel = formatMonthYear(start);
+    const toLabel = endStr ? formatMonthYear(end) : "Present";
+    const durationLabel = formatDuration(start, end);
+
+    return `${fromLabel} – ${toLabel} · ${durationLabel}`;
+  };
+
+
   const techSections = [
     {
       label: "Frontend",
@@ -436,7 +475,7 @@ export default function Home() {
                         SirpiDataScience
                       </a>
                       <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                        Full-time · 11 mos · Bengaluru, Karnataka, India · On-site
+                        {formatDateRange("2025-01-01")} · Bengaluru, Karnataka, India · On-site
                       </p>
                     </div>
                     <div className="flex flex-wrap gap-1 sm:gap-2 sm:justify-end">
@@ -465,7 +504,7 @@ export default function Home() {
                           Full Stack Developer
                         </h5>
                         <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
-                          Jun 2025 – Present · 6 mos
+                          {formatDateRange("2025-06-01")}
                         </p>
                         <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1.5 leading-relaxed">
                           Working across frontend and backend to build internal tools,
@@ -484,7 +523,7 @@ export default function Home() {
                           Full Stack Developer Intern
                         </h5>
                         <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
-                          Jan 2025 – Jun 2025 · 6 mos
+                          {formatDateRange("2025-01-01", "2025-05-30")}
                         </p>
                         <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1.5 leading-relaxed">
                           Contributed to features in existing products, fixed bugs, and
@@ -628,8 +667,8 @@ export default function Home() {
         </section>
 
 
-                {/* TECH STACK – PINTEREST / MASONRY STYLE */}
-                <section className="space-y-4">
+        {/* TECH STACK – PINTEREST / MASONRY STYLE */}
+        <section className="space-y-4">
           <div>
             <h3 className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-slate-50">
               Tech I enjoy working with
