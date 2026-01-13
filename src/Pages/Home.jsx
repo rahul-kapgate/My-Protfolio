@@ -10,6 +10,9 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import GithubProfileSection from "../components/GithubProfileSection";
+import Lottie from "lottie-react";
+import planetAnim from "../assets/lottie/planet.json";
+
 
 export default function Home() {
   const [theme, setTheme] = useState("dark");
@@ -597,11 +600,18 @@ export default function Home() {
           </h3>
 
           <div className="rounded-2xl border border-slate-200 bg-white/80 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/40 dark:shadow-none transition-colors">
-            {apodLoading && (
-              <p className="text-sm text-slate-500 dark:text-slate-400">
-                Loading today&apos;s space picture...
-              </p>
-            )}
+          {apodLoading && (
+  <div className="flex flex-col items-center justify-center gap-3 py-10">
+    <div className="w-36 sm:w-44 md:w-52">
+      <Lottie animationData={planetAnim} loop autoplay />
+    </div>
+    <p className="text-sm text-slate-500 dark:text-slate-400">
+      Loading today&apos;s space picture...
+    </p>
+  </div>
+)}
+
+ 
 
             {!apodLoading && apodError && (
               <p className="text-sm text-red-500">{apodError}</p>
