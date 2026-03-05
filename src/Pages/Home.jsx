@@ -289,13 +289,13 @@ export default function Home() {
         >
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-indigo-500 dark:text-indigo-400 mb-4">
-              SOFTWARE ENGINEER
+              I'M SOFTWARE ENGINEER
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
-              Building clean, modern, and reliable web experiences.
+              Rahul Kapgate
             </h2>
             <p className="mt-5 text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl">
-              I&apos;m Rahul, a full-stack engineer currently focused on
+               A full-stack engineer currently focused on
               building{" "}
               <span className="text-slate-900 dark:text-slate-200 font-semibold">
                 Artistic Vickey
@@ -367,9 +367,6 @@ export default function Home() {
 
               <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 blur-2xl opacity-60" />
               <div className="absolute inset-x-6 bottom-6 space-y-3">
-                <p className="text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
-                  CURRENTLY BUILDING
-                </p>
                 <p className="text-sm text-slate-800 dark:text-slate-200">
                   <span className="font-semibold">Artistic Vickey</span> – a
                   focused prep platform for the Maharashtra Applied Arts and
