@@ -1,5 +1,5 @@
 // src/pages/Home.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../App.css";
 import "../assets/fonts/fonts.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,6 +13,8 @@ import GithubProfileSection from "../components/GithubProfileSection";
 import Lottie from "lottie-react";
 import planetAnim from "../assets/lottie/planet.json";
 
+// ✅ Motion
+import { motion, useReducedMotion } from "framer-motion";
 
 export default function Home() {
   const [theme, setTheme] = useState("dark");
@@ -20,6 +22,14 @@ export default function Home() {
   const [apodData, setApodData] = useState(null);
   const [apodLoading, setApodLoading] = useState(true);
   const [apodError, setApodError] = useState("");
+
+  // ✅ For smooth scroll offset (sticky header)
+  const headerRef = useRef(null);
+
+  // ✅ Track active section for nav highlight
+  const [activeSection, setActiveSection] = useState("home");
+
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const saved = localStorage.getItem("theme") || "dark";
@@ -68,6 +78,55 @@ export default function Home() {
     }
   };
 
+  // ✅ Smooth scroll handler (prevents jump + accounts for sticky header)
+  const handleNavClick = (e, id) => {
+    e.preventDefault();
+    setActiveSection(id);
+
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    const headerH = headerRef.current?.offsetHeight ?? 0;
+    const y =
+      el.getBoundingClientRect().top + window.scrollY - headerH - 12;
+
+    window.scrollTo({
+      top: y,
+      behavior: "smooth",
+    });
+  };
+
+  // ✅ Auto update active nav while scrolling
+  useEffect(() => {
+    const ids = ["home", "experience", "skills", "projects"];
+    const els = ids
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    if (!els.length) return;
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        // pick most visible intersecting entry
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visible[0]?.target?.id) {
+          setActiveSection(visible[0].target.id);
+        }
+      },
+      {
+        root: null,
+        threshold: [0.2, 0.35, 0.5, 0.7],
+        // shifts "active" earlier/later for better UX with sticky header
+        rootMargin: "-20% 0px -65% 0px",
+      }
+    );
+
+    els.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
 
   // ----- Experience date helpers -----
   const formatMonthYear = (date) =>
@@ -105,7 +164,6 @@ export default function Home() {
 
     return `${fromLabel} – ${toLabel} · ${durationLabel}`;
   };
-
 
   const techSections = [
     {
@@ -215,11 +273,44 @@ export default function Home() {
     },
   ];
 
+  // ✅ Motion variants (keeps it smooth but not too flashy)
+  const containerV = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: reduceMotion ? { duration: 0 } : { staggerChildren: 0.08 },
+    },
+  };
+
+  const fadeUpV = {
+    hidden: { opacity: 0, y: reduceMotion ? 0 : 14 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: reduceMotion
+        ? { duration: 0 }
+        : { duration: 0.55, ease: "easeOut" },
+    },
+  };
+
+  const cardInV = {
+    hidden: { opacity: 0, y: reduceMotion ? 0 : 10 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: reduceMotion
+        ? { duration: 0 }
+        : { duration: 0.45, ease: "easeOut" },
+    },
+  };
 
   return (
     <div className="min-h-screen font-custom bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
       {/* Top Navbar */}
-      <header className="sticky top-0 z-20 border-b border-slate-200 bg-slate-50/80 backdrop-blur dark:border-slate-800 dark:bg-slate-950/80 transition-colors duration-300">
+      <header
+        ref={headerRef}
+        className="sticky top-0 z-20 border-b border-slate-200 bg-slate-50/80 backdrop-blur dark:border-slate-800 dark:bg-slate-950/80 transition-colors duration-300"
+      >
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
           {/* Logo / Name */}
           <div className="flex items-center gap-2">
@@ -239,69 +330,162 @@ export default function Home() {
             </div>
           </div>
 
-
           <div className="flex items-center gap-4">
             {/* Nav Links */}
-            <nav className="hidden sm:flex items-center gap-6 text-sm">
-              <a
-                href="#home"
-                className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-colors"
-              >
-                Home
-              </a>
-              <a
-                href="#experience"
-                className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-colors"
-              >
-                Experience
-              </a>
-              <a
-                href="#projects"
-                className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-colors"
-              >
-                Projects
-              </a>
+            <nav className="hidden sm:flex items-center gap-2 text-sm">
+              {/* ✅ animated active indicator */}
+              <div className="relative flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-2 py-1 dark:border-slate-800 dark:bg-slate-900/40">
+                <a
+                  href="#home"
+                  onClick={(e) => handleNavClick(e, "home")}
+                  className={`relative px-3 py-1.5 rounded-full transition-colors ${
+                    activeSection === "home"
+                      ? "text-slate-900 dark:text-white"
+                      : "text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+                  }`}
+                >
+                  {activeSection === "home" && (
+                    <motion.span
+                      layoutId="rk-nav-pill"
+                      className="absolute inset-0 rounded-full bg-slate-900/5 dark:bg-white/10"
+                      transition={
+                        reduceMotion
+                          ? { duration: 0 }
+                          : { type: "spring", stiffness: 420, damping: 30 }
+                      }
+                    />
+                  )}
+                  <span className="relative z-10">Home</span>
+                </a>
+
+                <a
+                  href="#experience"
+                  onClick={(e) => handleNavClick(e, "experience")}
+                  className={`relative px-3 py-1.5 rounded-full transition-colors ${
+                    activeSection === "experience"
+                      ? "text-slate-900 dark:text-white"
+                      : "text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+                  }`}
+                >
+                  {activeSection === "experience" && (
+                    <motion.span
+                      layoutId="rk-nav-pill"
+                      className="absolute inset-0 rounded-full bg-slate-900/5 dark:bg-white/10"
+                      transition={
+                        reduceMotion
+                          ? { duration: 0 }
+                          : { type: "spring", stiffness: 420, damping: 30 }
+                      }
+                    />
+                  )}
+                  <span className="relative z-10">Experience</span>
+                </a>
+
+                
+                <a
+                  href="#skills"
+                  onClick={(e) => handleNavClick(e, "skills")}
+                  className={`relative px-3 py-1.5 rounded-full transition-colors ${
+                    activeSection === "skills"
+                      ? "text-slate-900 dark:text-white"
+                      : "text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+                  }`}
+                >
+                  {activeSection === "skills" && (
+                    <motion.span
+                      layoutId="rk-nav-pill"
+                      className="absolute inset-0 rounded-full bg-slate-900/5 dark:bg-white/10"
+                      transition={
+                        reduceMotion
+                          ? { duration: 0 }
+                          : { type: "spring", stiffness: 420, damping: 30 }
+                      }
+                    />
+                  )}
+                  <span className="relative z-10">Skills</span>
+                </a>
+
+                <a
+                  href="#projects"
+                  onClick={(e) => handleNavClick(e, "projects")}
+                  className={`relative px-3 py-1.5 rounded-full transition-colors ${
+                    activeSection === "projects"
+                      ? "text-slate-900 dark:text-white"
+                      : "text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+                  }`}
+                >
+                  {activeSection === "projects" && (
+                    <motion.span
+                      layoutId="rk-nav-pill"
+                      className="absolute inset-0 rounded-full bg-slate-900/5 dark:bg-white/10"
+                      transition={
+                        reduceMotion
+                          ? { duration: 0 }
+                          : { type: "spring", stiffness: 420, damping: 30 }
+                      }
+                    />
+                  )}
+                  <span className="relative z-10">Projects</span>
+                </a>
+              </div>
             </nav>
 
             {/* Theme toggle */}
-            <button
+            <motion.button
               type="button"
               onClick={toggleTheme}
+              whileHover={reduceMotion ? undefined : { scale: 1.02 }}
+              whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+              transition={
+                reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 380, damping: 24 }
+              }
               className="flex items-center gap-2 rounded-full border border-slate-300 bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-200 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 transition-colors"
             >
               <FontAwesomeIcon
                 icon={theme === "dark" ? faMoon : faSun}
-                className={
-                  theme === "dark" ? "text-yellow-400" : "text-slate-900"
-                }
+                className={theme === "dark" ? "text-yellow-400" : "text-slate-900"}
               />
               <span>{theme === "dark" ? "Dark mode" : "Light mode"}</span>
-            </button>
+            </motion.button>
           </div>
         </div>
       </header>
 
       <main className="max-w-5xl mx-auto px-4 pt-10 pb-20 space-y-24">
         {/* HOME / HERO SECTION */}
-        <section
+        <motion.section
           id="home"
-          className="grid gap-10 md:grid-cols-[3fr,2fr] items-center"
+          className="grid gap-10 md:grid-cols-[3fr,2fr] items-center scroll-mt-24"
+          variants={containerV}
+          initial="hidden"
+          animate="show"
         >
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-indigo-500 dark:text-indigo-400 mb-4">
+          <motion.div variants={containerV}>
+            <motion.p
+              variants={fadeUpV}
+              className="text-xs font-semibold uppercase tracking-[0.25em] text-indigo-500 dark:text-indigo-400 mb-4"
+            >
               I'M SOFTWARE ENGINEER
-            </p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
+            </motion.p>
+
+            <motion.h2
+              variants={fadeUpV}
+              className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-slate-50"
+            >
               Rahul Kapgate
-            </h2>
-            <p className="mt-5 text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl">
-               A full-stack engineer currently focused on
-              building{" "}
+            </motion.h2>
+
+            <motion.p
+              variants={fadeUpV}
+              className="mt-5 text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl"
+            >
+              A full-stack engineer currently focused on building{" "}
               <span className="text-slate-900 dark:text-slate-200 font-semibold">
                 Artistic Vickey
               </span>{" "}
               — a dedicated platform for MAH AAC CET aspirants. I love working
-              with <span className="text-slate-900 dark:text-slate-200">React</span>,{" "}
+              with{" "}
+              <span className="text-slate-900 dark:text-slate-200">React</span>,{" "}
               <span className="text-slate-900 dark:text-slate-200">
                 Node / FastAPI
               </span>
@@ -311,26 +495,35 @@ export default function Home() {
               </span>{" "}
               to craft products that feel fast, polished, and thoughtfully
               designed.
-            </p>
+            </motion.p>
 
             {/* CTA Buttons */}
-            <div className="mt-7 flex flex-wrap gap-3">
-              <a
+            <motion.div variants={fadeUpV} className="mt-7 flex flex-wrap gap-3">
+              <motion.a
                 href="#projects"
+                onClick={(e) => handleNavClick(e, "projects")}
+                whileHover={reduceMotion ? undefined : { y: -1 }}
+                whileTap={reduceMotion ? undefined : { scale: 0.99 }}
                 className="inline-flex items-center rounded-full bg-indigo-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-indigo-500 transition-colors"
               >
                 View Projects
-              </a>
-              <a
+              </motion.a>
+              <motion.a
                 href="#experience"
+                onClick={(e) => handleNavClick(e, "experience")}
+                whileHover={reduceMotion ? undefined : { y: -1 }}
+                whileTap={reduceMotion ? undefined : { scale: 0.99 }}
                 className="inline-flex items-center rounded-full border border-slate-300 px-5 py-2.5 text-sm font-medium text-slate-800 hover:border-slate-400 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:border-slate-500 dark:hover:bg-slate-900 transition-colors"
               >
                 View Experience
-              </a>
-            </div>
+              </motion.a>
+            </motion.div>
 
             {/* Social Links */}
-            <div className="mt-8 flex items-center gap-5 text-slate-500 dark:text-slate-400">
+            <motion.div
+              variants={fadeUpV}
+              className="mt-8 flex items-center gap-5 text-slate-500 dark:text-slate-400"
+            >
               <a
                 href="https://github.com/rahul-kapgate"
                 target="_blank"
@@ -358,13 +551,22 @@ export default function Home() {
               >
                 <FontAwesomeIcon icon={faTwitter} size="lg" />
               </a>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Hero side card focusing Artistic Vickey */}
           <div className="hidden md:block">
-            <div className="relative h-64 rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-100 via-slate-50 to-slate-100 overflow-hidden dark:border-slate-800 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 transition-colors rk-animate-float">
-
+            <motion.div
+              initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={
+                reduceMotion
+                  ? { duration: 0 }
+                  : { duration: 0.6, ease: "easeOut", delay: 0.15 }
+              }
+              whileHover={reduceMotion ? undefined : { y: -3 }}
+              className="relative h-64 rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-100 via-slate-50 to-slate-100 overflow-hidden dark:border-slate-800 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 transition-colors rk-animate-float"
+            >
               <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 blur-2xl opacity-60" />
               <div className="absolute inset-x-6 bottom-6 space-y-3">
                 <p className="text-sm text-slate-800 dark:text-slate-200">
@@ -384,9 +586,9 @@ export default function Home() {
                   </span>
                 </a>
               </div>
-            </div>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* HOW I SHIP A FEATURE */}
         <section className="space-y-4">
@@ -404,10 +606,18 @@ export default function Home() {
             {/* Connecting line on desktop */}
             <div className="hidden md:block absolute inset-x-4 top-8 h-px bg-slate-200 dark:bg-slate-700" />
 
-            <div className="grid gap-4 md:grid-cols-4">
+            <motion.div
+              className="grid gap-4 md:grid-cols-4"
+              variants={containerV}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.25 }}
+            >
               {featureFlow.map((step) => (
-                <div
+                <motion.div
                   key={step.title}
+                  variants={cardInV}
+                  whileHover={reduceMotion ? undefined : { y: -2 }}
                   className="relative rounded-2xl border border-slate-200 bg-white/80 p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/40 dark:shadow-none"
                 >
                   {/* Step dot (for desktop line) */}
@@ -439,14 +649,14 @@ export default function Home() {
                       ))}
                     </div>
                   )}
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
         {/* EXPERIENCE SECTION */}
-        <section id="experience" className="space-y-6">
+        <section id="experience" className="space-y-6 scroll-mt-24">
           <div>
             <h3 className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-slate-50">
               Experience
@@ -458,7 +668,13 @@ export default function Home() {
 
           <div className="space-y-6">
             {/* SirpiDataScience */}
-            <div className="rounded-2xl border border-slate-200 bg-white/80 p-4 sm:p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/40 dark:shadow-none transition-colors">
+            <motion.div
+              initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={reduceMotion ? { duration: 0 } : { duration: 0.45, ease: "easeOut" }}
+              className="rounded-2xl border border-slate-200 bg-white/80 p-4 sm:p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/40 dark:shadow-none transition-colors"
+            >
               <div className="flex gap-3">
                 <div className="mt-1 h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-slate-800 flex items-center justify-center text-[11px] sm:text-xs font-semibold text-slate-200">
                   S
@@ -535,10 +751,16 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Micropro card */}
-            <div className="rounded-2xl border border-slate-200 bg-white/80 p-4 sm:p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/40 dark:shadow-none transition-colors">
+            <motion.div
+              initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={reduceMotion ? { duration: 0 } : { duration: 0.45, ease: "easeOut" }}
+              className="rounded-2xl border border-slate-200 bg-white/80 p-4 sm:p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/40 dark:shadow-none transition-colors"
+            >
               <div className="flex gap-3">
                 <div className="mt-1 h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-slate-800 flex items-center justify-center text-[11px] sm:text-xs font-semibold text-slate-200">
                   M
@@ -583,7 +805,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -596,19 +818,23 @@ export default function Home() {
             Space Break: NASA Astronomy Picture of the Day 🚀
           </h3>
 
-          <div className="rounded-2xl border border-slate-200 bg-white/80 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/40 dark:shadow-none transition-colors">
-          {apodLoading && (
-  <div className="flex flex-col items-center justify-center gap-3 py-10">
-    <div className="w-36 sm:w-44 md:w-52">
-      <Lottie animationData={planetAnim} loop autoplay />
-    </div>
-    <p className="text-sm text-slate-500 dark:text-slate-400">
-      Loading today&apos;s space picture...
-    </p>
-  </div>
-)}
-
- 
+          <motion.div
+            initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 0.45, ease: "easeOut" }}
+            className="rounded-2xl border border-slate-200 bg-white/80 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/40 dark:shadow-none transition-colors"
+          >
+            {apodLoading && (
+              <div className="flex flex-col items-center justify-center gap-3 py-10">
+                <div className="w-36 sm:w-44 md:w-52">
+                  <Lottie animationData={planetAnim} loop autoplay />
+                </div>
+                <p className="text-sm text-slate-500 dark:text-slate-400">
+                  Loading today&apos;s space picture...
+                </p>
+              </div>
+            )}
 
             {!apodLoading && apodError && (
               <p className="text-sm text-red-500">{apodError}</p>
@@ -670,12 +896,11 @@ export default function Home() {
                 )}
               </div>
             )}
-          </div>
+          </motion.div>
         </section>
 
-
         {/* TECH STACK – PINTEREST / MASONRY STYLE */}
-        <section className="space-y-4">
+        <section id="skills" className="space-y-4">
           <div>
             <h3 className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-slate-50">
               Tech I enjoy working with
@@ -689,9 +914,14 @@ export default function Home() {
           {/* Masonry-style columns */}
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
             {techSections.map((section) => (
-              <div
+              <motion.div
                 key={section.label}
                 style={{ breakInside: "avoid" }}
+                initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={reduceMotion ? { duration: 0 } : { duration: 0.4, ease: "easeOut" }}
+                whileHover={reduceMotion ? undefined : { y: -2 }}
                 className="mb-4 rounded-3xl border border-slate-200 bg-white/80 p-4 sm:p-5 shadow-sm
                            hover:shadow-md hover:-translate-y-0.5 transition-all
                            dark:border-slate-800 dark:bg-slate-900/40 dark:shadow-none"
@@ -734,15 +964,13 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </section>
 
-
-
         {/* PROJECTS SECTION */}
-        <section id="projects" className="space-y-6">
+        <section id="projects" className="space-y-6 scroll-mt-24">
           <div>
             <h3 className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-slate-50">
               Projects
@@ -754,7 +982,14 @@ export default function Home() {
 
           <div className="grid gap-5 md:grid-cols-2">
             {/* Project 1 – Artistic Vickey */}
-            <div className="rounded-2xl border border-slate-200 bg-white/80 p-5 sm:p-6 flex flex-col justify-between shadow-sm dark:border-slate-800 dark:bg-slate-900/40 dark:shadow-none transition-colors">
+            <motion.div
+              initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={reduceMotion ? { duration: 0 } : { duration: 0.45, ease: "easeOut" }}
+              whileHover={reduceMotion ? undefined : { y: -2 }}
+              className="rounded-2xl border border-slate-200 bg-white/80 p-5 sm:p-6 flex flex-col justify-between shadow-sm dark:border-slate-800 dark:bg-slate-900/40 dark:shadow-none transition-colors"
+            >
               <div>
                 <h4 className="text-base sm:text-lg font-semibold text-slate-900 dark:text-slate-100">
                   Artistic Vickey
@@ -799,7 +1034,7 @@ export default function Home() {
                   </a>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Additional project cards can go here */}
           </div>
