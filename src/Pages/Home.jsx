@@ -10,7 +10,7 @@ import {
   faReddit,
   faDiscord,
 } from "@fortawesome/free-brands-svg-icons";
-import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
+import { faSun, faMoon, faFileArrowDown } from "@fortawesome/free-solid-svg-icons";
 import GithubProfileSection from "../components/GithubProfileSection";
 import { motion, useReducedMotion } from "framer-motion";
 import HeroTerminalCard from "../components/HeroTerminalCard";
@@ -650,6 +650,19 @@ export default function Home() {
                 <FontAwesomeIcon icon={faDiscord} size="lg" />
                 <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-slate-900 px-2 py-1 text-xs text-white opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 dark:bg-slate-100 dark:text-slate-900">
                   Discord
+                </span>
+              </a>
+
+              <a
+                href="/Rahul-Kapgate-Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Resume"
+                className="group relative hover:text-slate-900 dark:hover:text-white transition-colors"
+              >
+                <FontAwesomeIcon icon={faFileArrowDown} size="lg" />
+                <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-slate-900 px-2 py-1 text-xs text-white opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 dark:bg-slate-100 dark:text-slate-900">
+                  Resume
                 </span>
               </a>
             </motion.div>
