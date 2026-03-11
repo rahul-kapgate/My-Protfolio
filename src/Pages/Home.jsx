@@ -633,40 +633,6 @@ export default function Home() {
             </motion.div>
           </motion.div>
 
-          {/* Hero side card focusing Artistic Vickey */}
-          <div className="hidden md:block">
-            <motion.div
-              initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={
-                reduceMotion
-                  ? { duration: 0 }
-                  : { duration: 0.6, ease: "easeOut", delay: 0.15 }
-              }
-              whileHover={reduceMotion ? undefined : { y: -3 }}
-              className="relative h-64 rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-100 via-slate-50 to-slate-100 overflow-hidden dark:border-slate-800 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 transition-colors rk-animate-float"
-            >
-              <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 blur-2xl opacity-60" />
-              <div className="absolute inset-x-6 bottom-6 space-y-3">
-                <p className="text-sm text-slate-800 dark:text-slate-200">
-                  <span className="font-semibold">Artistic Vickey</span> – a
-                  focused prep platform for the Maharashtra Applied Arts and
-                  Crafts Common Entrance Test (MAH AAC CET).
-                </p>
-                <a
-                  href="https://artisticvickey.in/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex text-xs items-center rounded-full bg-slate-900/5 px-4 py-2 text-slate-800 hover:bg-slate-900/10 dark:bg-slate-100/10 dark:text-slate-100 dark:hover:bg-slate-100/20 transition-colors"
-                >
-                  Visit artisticvickey.in
-                  <span className="ml-2 text-slate-500 dark:text-slate-400">
-                    ↗
-                  </span>
-                </a>
-              </div>
-            </motion.div>
-          </div>
         </motion.section>
 
         {/* HOW I SHIP A FEATURE */}
