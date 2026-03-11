@@ -10,7 +10,11 @@ import {
   faReddit,
   faDiscord,
 } from "@fortawesome/free-brands-svg-icons";
-import { faSun, faMoon, faFileArrowDown } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSun,
+  faMoon,
+  faFileArrowDown,
+} from "@fortawesome/free-solid-svg-icons";
 import GithubProfileSection from "../components/GithubProfileSection";
 import { motion, useReducedMotion } from "framer-motion";
 import HeroTerminalCard from "../components/HeroTerminalCard";
@@ -948,20 +952,82 @@ export default function Home() {
               className="rounded-2xl border border-slate-200 bg-white/80 p-5 sm:p-6 flex flex-col justify-between shadow-sm dark:border-slate-800 dark:bg-slate-900/40 dark:shadow-none transition-colors"
             >
               <div>
-                <h4 className="text-base sm:text-lg font-semibold text-slate-900 dark:text-slate-100">
-                  Artistic Vickey
-                </h4>
-                <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                  An educational platform tailored for{" "}
-                  <span className="text-slate-900 dark:text-slate-200 font-medium">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <h4 className="text-base sm:text-lg font-semibold text-slate-900 dark:text-slate-100">
+                      ArtisticVickey.in
+                    </h4>
+                    <p className="mt-1 text-xs sm:text-sm text-indigo-600 dark:text-indigo-300 font-medium">
+                      Full-Stack Course + Practice Platform
+                    </p>
+                  </div>
+
+                  <span className="shrink-0 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[10px] sm:text-[11px] font-medium text-emerald-700 dark:border-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300">
+                    Live
+                  </span>
+                </div>
+
+                <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                  A full-stack platform for{" "}
+                  <span className="font-medium text-slate-900 dark:text-slate-200">
                     MAH AAC CET
                   </span>{" "}
-                  aspirants: courses, mock tests, PYQs, resources, and video
-                  lectures – all structured for applied arts preparation.
+                  aspirants with courses, resources, video lectures, mock tests,
+                  and PYQ practice in one structured learning experience.
                 </p>
+
+                <div className="mt-4 flex flex-wrap gap-2 text-[11px]">
+                  {[
+                    "React",
+                    "TypeScript",
+                    "Tailwind CSS",
+                    "TanStack Query",
+                    "Node.js",
+                    "Express",
+                    "JWT",
+                    "Supabase",
+                    "AWS S3",
+                    "Razorpay",
+                    "Resend",
+                  ].map((tech) => (
+                    <span
+                      key={tech}
+                      className="rounded-full border border-slate-300 px-2.5 py-1 text-slate-700 dark:border-slate-700 dark:text-slate-300"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <ul className="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                  <li>
+                    • Built a responsive course platform with course catalog,
+                    pricing/discount display, and authenticated{" "}
+                    <span className="font-medium text-slate-900 dark:text-slate-200">
+                      My Courses
+                    </span>{" "}
+                    access for enrolled learners.
+                  </li>
+                  <li>
+                    • Implemented section-based learning flows for{" "}
+                    <span className="font-medium text-slate-900 dark:text-slate-200">
+                      Resources, Video Lectures, Mock Tests, and PYQ tests
+                    </span>
+                    .
+                  </li>
+                  <li>
+                    • Developed a timed test engine with question loading,
+                    answer submission, scoring, and detailed attempt review.
+                  </li>
+                  <li>
+                    • Built backend foundations including auth, password reset,
+                    role-based admin controls, and payment order + verification
+                    for enrollments.
+                  </li>
+                </ul>
               </div>
 
-              <div className="mt-4 space-y-2">
+              <div className="mt-5 space-y-3">
                 <a
                   href="https://artisticvickey.in/"
                   target="_blank"
@@ -992,7 +1058,100 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Additional project cards can go here */}
+            <motion.div
+              initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={
+                reduceMotion
+                  ? { duration: 0 }
+                  : { duration: 0.45, ease: "easeOut" }
+              }
+              whileHover={reduceMotion ? undefined : { y: -2 }}
+              className="rounded-2xl border border-slate-200 bg-white/80 p-5 sm:p-6 flex flex-col justify-between shadow-sm dark:border-slate-800 dark:bg-slate-900/40 dark:shadow-none transition-colors"
+            >
+              <div>
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <h4 className="text-base sm:text-lg font-semibold text-slate-900 dark:text-slate-100">
+                      Smart Bookmark App
+                    </h4>
+                    <p className="mt-1 text-xs sm:text-sm text-indigo-600 dark:text-indigo-300 font-medium">
+                      Private Bookmark Manager
+                    </p>
+                  </div>
+
+                  <span className="shrink-0 rounded-full border border-slate-300 bg-slate-100 px-2.5 py-1 text-[10px] sm:text-[11px] font-medium text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                    GitHub
+                  </span>
+                </div>
+
+                <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                  A bookmark manager built with{" "}
+                  <span className="font-medium text-slate-900 dark:text-slate-200">
+                    Next.js App Router
+                  </span>{" "}
+                  and{" "}
+                  <span className="font-medium text-slate-900 dark:text-slate-200">
+                    Supabase
+                  </span>{" "}
+                  where users can securely save private bookmarks, manage them
+                  across tabs, and authenticate with Google OAuth.
+                </p>
+
+                <div className="mt-4 flex flex-wrap gap-2 text-[11px]">
+                  {[
+                    "Next.js",
+                    "App Router",
+                    "TypeScript",
+                    "Tailwind CSS",
+                    "Supabase Auth",
+                    "Postgres",
+                    "Realtime",
+                  ].map((tech) => (
+                    <span
+                      key={tech}
+                      className="rounded-full border border-slate-300 px-2.5 py-1 text-slate-700 dark:border-slate-700 dark:text-slate-300"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <ul className="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                  <li>
+                    • Built Google OAuth-only authentication using Supabase Auth
+                    with secure callback handling.
+                  </li>
+                  <li>
+                    • Implemented private user-specific bookmarks with{" "}
+                    <span className="font-medium text-slate-900 dark:text-slate-200">
+                      Row Level Security
+                    </span>{" "}
+                    to ensure users only access their own data.
+                  </li>
+                  <li>
+                    • Added realtime bookmark syncing across tabs so changes
+                    appear without requiring a manual refresh.
+                  </li>
+                  <li>
+                    • Solved tricky issues around OAuth redirect URLs, App
+                    Router cookie handling, and stale realtime auth state.
+                  </li>
+                </ul>
+              </div>
+
+              <div className="mt-5 space-y-3">
+                <a
+                  href="https://github.com/rahul-kapgate/smart-bookmark-app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full justify-center items-center rounded-full bg-indigo-600 px-4 py-2 text-xs sm:text-sm font-medium text-white hover:bg-indigo-500 transition-colors"
+                >
+                  View GitHub Repo ↗
+                </a>
+              </div>
+            </motion.div>
           </div>
         </section>
       </main>
