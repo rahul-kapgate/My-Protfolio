@@ -533,11 +533,12 @@ export default function Home() {
         {/* HOME / HERO SECTION */}
         <motion.section
           id="home"
-          className="grid gap-10 md:grid-cols-[3fr,2fr] items-center scroll-mt-24"
+          className="grid gap-10 md:grid-cols-[1fr,1fr] items-center scroll-mt-24"
           variants={containerV}
           initial="hidden"
           animate="show"
         >
+          {/* Left side */}
           <motion.div variants={containerV}>
             <motion.p
               variants={fadeUpV}
@@ -592,6 +593,7 @@ export default function Home() {
               >
                 View Projects
               </motion.a>
+
               <motion.a
                 href="#experience"
                 onClick={(e) => handleNavClick(e, "experience")}
@@ -612,11 +614,11 @@ export default function Home() {
                 href="https://github.com/rahul-kapgate"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Github Profile"
+                aria-label="Github Personal Profile"
                 className="group relative hover:text-slate-900 dark:hover:text-white transition-colors"
               >
                 <FontAwesomeIcon icon={faGithub} size="lg" />
-                <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 rounded-md bg-slate-900 px-2 py-1 text-xs text-white opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 dark:bg-slate-100 dark:text-slate-900">
+                <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-slate-900 px-2 py-1 text-xs text-white opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 dark:bg-slate-100 dark:text-slate-900">
                   GitHub (Personal)
                 </span>
               </a>
@@ -625,11 +627,11 @@ export default function Home() {
                 href="https://github.com/rahul-sirpi"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Github Profile"
+                aria-label="Github Work Profile"
                 className="group relative hover:text-slate-900 dark:hover:text-white transition-colors"
               >
                 <FontAwesomeIcon icon={faGithub} size="lg" />
-                <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 rounded-md bg-slate-900 px-2 py-1 text-xs text-white opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 dark:bg-slate-100 dark:text-slate-900">
+                <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-slate-900 px-2 py-1 text-xs text-white opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 dark:bg-slate-100 dark:text-slate-900">
                   GitHub (Work)
                 </span>
               </a>
@@ -642,7 +644,7 @@ export default function Home() {
                 className="group relative hover:text-slate-900 dark:hover:text-white transition-colors"
               >
                 <FontAwesomeIcon icon={faLinkedin} size="lg" />
-                <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 rounded-md bg-slate-900 px-2 py-1 text-xs text-white opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 dark:bg-slate-100 dark:text-slate-900">
+                <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-slate-900 px-2 py-1 text-xs text-white opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 dark:bg-slate-100 dark:text-slate-900">
                   LinkedIn
                 </span>
               </a>
@@ -651,14 +653,15 @@ export default function Home() {
                 href="https://x.com/Rahul__Kapgate"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Twitter Profile"
+                aria-label="X Profile"
                 className="group relative hover:text-slate-900 dark:hover:text-white transition-colors"
               >
                 <FontAwesomeIcon icon={faTwitter} size="lg" />
-                <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 rounded-md bg-slate-900 px-2 py-1 text-xs text-white opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 dark:bg-slate-100 dark:text-slate-900">
+                <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-slate-900 px-2 py-1 text-xs text-white opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 dark:bg-slate-100 dark:text-slate-900">
                   X
                 </span>
               </a>
+
               <a
                 href="https://www.reddit.com/user/rahul-kapgate-01/"
                 target="_blank"
@@ -667,14 +670,99 @@ export default function Home() {
                 className="group relative hover:text-slate-900 dark:hover:text-white transition-colors"
               >
                 <FontAwesomeIcon icon={faReddit} size="lg" />
-                <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 rounded-md bg-slate-900 px-2 py-1 text-xs text-white opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 dark:bg-slate-100 dark:text-slate-900">
+                <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-slate-900 px-2 py-1 text-xs text-white opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 dark:bg-slate-100 dark:text-slate-900">
                   Reddit
+                </span>
+              </a>
+
+              <a
+                href="https://discord.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Discord Profile"
+                className="group relative hover:text-slate-900 dark:hover:text-white transition-colors"
+              >
+                <FontAwesomeIcon icon={faDiscord} size="lg" />
+                <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-slate-900 px-2 py-1 text-xs text-white opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 dark:bg-slate-100 dark:text-slate-900">
+                  Discord
                 </span>
               </a>
             </motion.div>
           </motion.div>
-        </motion.section>
 
+          {/* Right side terminal card */}
+          <motion.div
+            variants={fadeUpV}
+            className="relative flex justify-center md:justify-end"
+          >
+            <div className="relative w-full max-w-md">
+              {/* Glow */}
+              <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-tr from-indigo-500/20 via-purple-500/10 to-pink-500/20 blur-2xl" />
+
+              <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white/80 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/60">
+                {/* Terminal top bar */}
+                <div className="flex items-center justify-between border-b border-slate-200 bg-slate-100/80 px-4 py-3 dark:border-slate-800 dark:bg-slate-950/80">
+                  <div className="flex items-center gap-2">
+                    <span className="h-3 w-3 rounded-full bg-red-400" />
+                    <span className="h-3 w-3 rounded-full bg-yellow-400" />
+                    <span className="h-3 w-3 rounded-full bg-green-400" />
+                  </div>
+                  <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
+                    rahul@portfolio:~$
+                  </p>
+                </div>
+
+                {/* Terminal body */}
+                <div className="space-y-4 px-5 py-5 font-mono text-sm">
+                  <div>
+                    <p className="text-emerald-500">$ whoami</p>
+                    <p className="mt-1 text-slate-700 dark:text-slate-300">
+                      Rahul Kapgate
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-emerald-500">$ role</p>
+                    <p className="mt-1 text-slate-700 dark:text-slate-300">
+                      Full Stack Developer
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-emerald-500">$ stack</p>
+                    <p className="mt-1 text-slate-700 dark:text-slate-300 leading-relaxed">
+                      React, Next.js, Node.js, FastAPI, PostgreSQL, Docker
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-emerald-500">$ status</p>
+                    <p className="mt-1 text-slate-700 dark:text-slate-300">
+                      Building scalable web apps and exploring DevOps workflows.
+                    </p>
+                  </div>
+
+                  <div className="pt-2 text-slate-500 dark:text-slate-500">
+                    <span className="text-emerald-500">$</span>{" "}
+                    <motion.span
+                      animate={
+                        reduceMotion ? undefined : { opacity: [1, 0, 1] }
+                      }
+                      transition={
+                        reduceMotion
+                          ? { duration: 0 }
+                          : { duration: 1, repeat: Infinity }
+                      }
+                      className="inline-block"
+                    >
+                      _
+                    </motion.span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.section>
 
         {/* EXPERIENCE SECTION */}
         <section id="experience" className="space-y-6 scroll-mt-24">
@@ -842,7 +930,7 @@ export default function Home() {
         </section>
 
         {/* GitHub snapshot (with input) */}
-        <GithubProfileSection defaultUsername="rahul-kapgate" />+
+        <GithubProfileSection defaultUsername="rahul-kapgate" />
 
         {/* ✅ SKILLS – ONLY spotlight hover bg effect, no tabs/search/expand */}
         <section id="skills" className="space-y-4 scroll-mt-24">
