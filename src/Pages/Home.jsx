@@ -12,18 +12,11 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import GithubProfileSection from "../components/GithubProfileSection";
-import Lottie from "lottie-react";
-import planetAnim from "../assets/lottie/planet.json";
-
-// ✅ Motion
 import { motion, useReducedMotion } from "framer-motion";
+import HeroTerminalCard from "../components/HeroTerminalCard";
 
 export default function Home() {
   const [theme, setTheme] = useState("dark");
-
-  const [apodData, setApodData] = useState(null);
-  const [apodLoading, setApodLoading] = useState(true);
-  const [apodError, setApodError] = useState("");
 
   // ✅ For smooth scroll offset (sticky header)
   const headerRef = useRef(null);
@@ -41,34 +34,6 @@ export default function Home() {
     } else {
       document.documentElement.classList.remove("dark");
     }
-  }, []);
-
-  useEffect(() => {
-    const fetchApod = async () => {
-      try {
-        setApodLoading(true);
-        setApodError("");
-        const res = await fetch(
-          "https://api.nasa.gov/planetary/apod?api_key=3qtzEDG1tFeKF2sI71I6VJ9h0tbeXWwLZd2REy6Z",
-        );
-
-        if (!res.ok) {
-          throw new Error(`Request failed with status ${res.status}`);
-        }
-
-        const data = await res.json();
-        setApodData(data);
-      } catch (err) {
-        console.error(err);
-        setApodError(
-          "Unable to load NASA Astronomy Picture of the Day right now.",
-        );
-      } finally {
-        setApodLoading(false);
-      }
-    };
-
-    fetchApod();
   }, []);
 
   const toggleTheme = () => {
@@ -695,72 +660,7 @@ export default function Home() {
             variants={fadeUpV}
             className="relative flex justify-center md:justify-end"
           >
-            <div className="relative w-full max-w-md">
-              {/* Glow */}
-              <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-tr from-indigo-500/20 via-purple-500/10 to-pink-500/20 blur-2xl" />
-
-              <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white/80 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/60">
-                {/* Terminal top bar */}
-                <div className="flex items-center justify-between border-b border-slate-200 bg-slate-100/80 px-4 py-3 dark:border-slate-800 dark:bg-slate-950/80">
-                  <div className="flex items-center gap-2">
-                    <span className="h-3 w-3 rounded-full bg-red-400" />
-                    <span className="h-3 w-3 rounded-full bg-yellow-400" />
-                    <span className="h-3 w-3 rounded-full bg-green-400" />
-                  </div>
-                  <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
-                    rahul@portfolio:~$
-                  </p>
-                </div>
-
-                {/* Terminal body */}
-                <div className="space-y-4 px-5 py-5 font-mono text-sm">
-                  <div>
-                    <p className="text-emerald-500">$ whoami</p>
-                    <p className="mt-1 text-slate-700 dark:text-slate-300">
-                      Rahul Kapgate
-                    </p>
-                  </div>
-
-                  <div>
-                    <p className="text-emerald-500">$ role</p>
-                    <p className="mt-1 text-slate-700 dark:text-slate-300">
-                      Full Stack Developer
-                    </p>
-                  </div>
-
-                  <div>
-                    <p className="text-emerald-500">$ stack</p>
-                    <p className="mt-1 text-slate-700 dark:text-slate-300 leading-relaxed">
-                      React, Next.js, Node.js, FastAPI, PostgreSQL, Docker
-                    </p>
-                  </div>
-
-                  <div>
-                    <p className="text-emerald-500">$ status</p>
-                    <p className="mt-1 text-slate-700 dark:text-slate-300">
-                      Building scalable web apps and exploring DevOps workflows.
-                    </p>
-                  </div>
-
-                  <div className="pt-2 text-slate-500 dark:text-slate-500">
-                    <span className="text-emerald-500">$</span>{" "}
-                    <motion.span
-                      animate={
-                        reduceMotion ? undefined : { opacity: [1, 0, 1] }
-                      }
-                      transition={
-                        reduceMotion
-                          ? { duration: 0 }
-                          : { duration: 1, repeat: Infinity }
-                      }
-                      className="inline-block"
-                    >
-                      _
-                    </motion.span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <HeroTerminalCard />
           </motion.div>
         </motion.section>
 
