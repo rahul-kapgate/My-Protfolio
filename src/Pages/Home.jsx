@@ -7,6 +7,8 @@ import {
   faGithub,
   faLinkedin,
   faTwitter,
+  faReddit,
+  faDiscord,
 } from "@fortawesome/free-brands-svg-icons";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import GithubProfileSection from "../components/GithubProfileSection";
@@ -611,27 +613,63 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Github Profile"
-                className="hover:text-slate-900 dark:hover:text-white transition-colors"
+                className="group relative hover:text-slate-900 dark:hover:text-white transition-colors"
               >
                 <FontAwesomeIcon icon={faGithub} size="lg" />
+                <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 rounded-md bg-slate-900 px-2 py-1 text-xs text-white opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 dark:bg-slate-100 dark:text-slate-900">
+                  GitHub (Personal)
+                </span>
               </a>
+
+              <a
+                href="https://github.com/rahul-sirpi"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Github Profile"
+                className="group relative hover:text-slate-900 dark:hover:text-white transition-colors"
+              >
+                <FontAwesomeIcon icon={faGithub} size="lg" />
+                <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 rounded-md bg-slate-900 px-2 py-1 text-xs text-white opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 dark:bg-slate-100 dark:text-slate-900">
+                  GitHub (Work)
+                </span>
+              </a>
+
               <a
                 href="https://www.linkedin.com/in/rahul-kapgate/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn Profile"
-                className="hover:text-slate-900 dark:hover:text-white transition-colors"
+                className="group relative hover:text-slate-900 dark:hover:text-white transition-colors"
               >
                 <FontAwesomeIcon icon={faLinkedin} size="lg" />
+                <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 rounded-md bg-slate-900 px-2 py-1 text-xs text-white opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 dark:bg-slate-100 dark:text-slate-900">
+                  LinkedIn
+                </span>
               </a>
+
               <a
                 href="https://x.com/Rahul__Kapgate"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Twitter Profile"
-                className="hover:text-slate-900 dark:hover:text-white transition-colors"
+                className="group relative hover:text-slate-900 dark:hover:text-white transition-colors"
               >
                 <FontAwesomeIcon icon={faTwitter} size="lg" />
+                <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 rounded-md bg-slate-900 px-2 py-1 text-xs text-white opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 dark:bg-slate-100 dark:text-slate-900">
+                  X
+                </span>
+              </a>
+              <a
+                href="https://www.reddit.com/user/rahul-kapgate-01/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Reddit Profile"
+                className="group relative hover:text-slate-900 dark:hover:text-white transition-colors"
+              >
+                <FontAwesomeIcon icon={faReddit} size="lg" />
+                <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 rounded-md bg-slate-900 px-2 py-1 text-xs text-white opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 dark:bg-slate-100 dark:text-slate-900">
+                  Reddit
+                </span>
               </a>
             </motion.div>
           </motion.div>
