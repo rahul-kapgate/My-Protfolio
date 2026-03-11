@@ -555,22 +555,25 @@ export default function Home() {
               variants={fadeUpV}
               className="mt-5 text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl"
             >
-              A full-stack engineer currently focused on building{" "}
+              I’m a full-stack developer focused on crafting modern web
+              applications with{" "}
               <span className="text-slate-900 dark:text-slate-200 font-semibold">
-                Artistic Vickey
-              </span>{" "}
-              — a dedicated platform for MAH AAC CET aspirants. I love working
-              with{" "}
-              <span className="text-slate-900 dark:text-slate-200">React</span>,{" "}
+                React
+              </span>
+              ,{" "}
+              <span className="text-slate-900 dark:text-slate-200 font-semibold">
+                Next.js
+              </span>
+              ,{" "}
               <span className="text-slate-900 dark:text-slate-200">
-                Node / FastAPI
+                Node.js / FastAPI
               </span>
               , and{" "}
               <span className="text-slate-900 dark:text-slate-200">
-                modern web tools
-              </span>{" "}
-              to craft products that feel fast, polished, and thoughtfully
-              designed.
+                DevOps workflows
+              </span>
+              . I enjoy turning ideas into performant, scalable, and
+              thoughtfully designed products.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -632,7 +635,6 @@ export default function Home() {
               </a>
             </motion.div>
           </motion.div>
-
         </motion.section>
 
         {/* HOW I SHIP A FEATURE */}
