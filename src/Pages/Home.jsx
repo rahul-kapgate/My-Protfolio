@@ -19,6 +19,8 @@ import GithubProfileSection from "../components/GithubProfileSection";
 import { motion, useReducedMotion } from "framer-motion";
 import HeroTerminalCard from "../components/HeroTerminalCard";
 import Preloader from "../components/Preloader";
+import ScrollToTop from "../components/ScrollToTop";
+import { HelmetProvider } from "react-helmet-async";
 
 export default function Home() {
   const [theme, setTheme] = useState("dark");
@@ -261,37 +263,6 @@ export default function Home() {
     },
   ];
 
-  const featureFlow = [
-    {
-      title: "1. Understand the problem",
-      subtitle: "Talk to people & read context",
-      detail:
-        "Clarify the why before touching code – requirements, constraints, and success criteria.",
-      tags: ["Calls / chats", "Product docs"],
-    },
-    {
-      title: "2. Sketch the solution",
-      subtitle: "Flows, rough UI, data shapes",
-      detail:
-        "Quick wireframes and data models to see how the feature fits into existing systems.",
-      tags: ["Figma / pen & paper", "ERDs"],
-    },
-    {
-      title: "3. Build iteratively",
-      subtitle: "Backend + frontend slices",
-      detail:
-        "Ship vertical slices: API, UI, and state together so the feature is testable end-to-end.",
-      tags: ["React", "FastAPI / Node", "PostgreSQL"],
-    },
-    {
-      title: "4. Ship & refine",
-      subtitle: "Review, deploy, iterate",
-      detail:
-        "Code review, deploy, then improve based on usage, edge cases, and feedback.",
-      tags: ["Code review", "Monitoring", "User feedback"],
-    },
-  ];
-
   // ✅ Motion variants
   const containerV = {
     hidden: { opacity: 0 },
@@ -355,6 +326,7 @@ export default function Home() {
 
   return (
     <>
+    <HelmetProvider>
       {loading && <Preloader onComplete={() => setLoading(false)} />}
       <div
         className={`min-h-screen font-custom ... ${loading ? "overflow-hidden" : ""}`}
@@ -1165,8 +1137,10 @@ export default function Home() {
               </div>
             </section>
           </main>
+          <ScrollToTop />
         </div>
       </div>
+      </HelmetProvider>
     </>
   );
 }
