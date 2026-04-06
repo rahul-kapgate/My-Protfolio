@@ -47,6 +47,7 @@ export default function HeroTerminalCard({
   shellLabel = "zsh",
   promptLabel = "rahul@dev",
   className = "",
+  start = true,
 }) {
   const reduceMotion = useReducedMotion();
   const { ref: spotRef, onMove: spotMove } = useSpotlight();
@@ -65,9 +66,11 @@ export default function HeroTerminalCard({
     return () => clearInterval(id);
   }, []);
 
-  // Terminal typing engine
+  // Terminal typing engine — waits for start prop
   useEffect(() => {
     let timer;
+
+    if (!start) return;
 
     if (reduceMotion) {
       setFinishedLines(lines);
@@ -92,15 +95,15 @@ export default function HeroTerminalCard({
 
     if (phase === "command") {
       if (cmdText.length < line.command.length) {
-        timer = setTimeout(() => {
-          setCmdText(line.command.slice(0, cmdText.length + 1));
-        }, 45 + Math.random() * 30); // variable typing speed
+        timer = setTimeout(
+          () => {
+            setCmdText(line.command.slice(0, cmdText.length + 1));
+          },
+          45 + Math.random() * 30,
+        ); // variable typing speed
       } else {
         const hasOutput = line.output || line.tags || line.json || line.dynamic;
-        timer = setTimeout(
-          () => setPhase(hasOutput ? "output" : "next"),
-          200
-        );
+        timer = setTimeout(() => setPhase(hasOutput ? "output" : "next"), 200);
       }
     } else if (phase === "output") {
       const outputStr = line.output || "";
@@ -120,7 +123,7 @@ export default function HeroTerminalCard({
     }
 
     return () => clearTimeout(timer);
-  }, [reduceMotion, lines, curIdx, cmdText, outText, phase]);
+  }, [reduceMotion, lines, curIdx, cmdText, outText, phase, start]);
 
   // ── Render helpers ──
   const renderOutput = (line, animated = false) => {
@@ -318,9 +321,7 @@ export default function HeroTerminalCard({
                 {finishedLines.map((line, i) => (
                   <motion.div
                     key={`done-${i}`}
-                    initial={
-                      reduceMotion ? undefined : { opacity: 0, x: -6 }
-                    }
+                    initial={reduceMotion ? undefined : { opacity: 0, x: -6 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={
                       reduceMotion

@@ -684,7 +684,7 @@ export default function Home() {
                 variants={fadeUpV}
                 className="relative flex justify-center md:justify-end"
               >
-                <HeroTerminalCard />
+                <HeroTerminalCard start={!loading} />
               </motion.div>
             </motion.section>
 
