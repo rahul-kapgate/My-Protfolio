@@ -22,7 +22,7 @@ import Preloader from "../components/Preloader";
 import ScrollToTop from "../components/ScrollToTop";
 import { HelmetProvider } from "react-helmet-async";
 import RubiksCube from "../components/RubiksCube";
-import SolarSystem from "../components/SolarSystem"
+import SolarSystem from "../components/SolarSystem";
 
 export default function Home() {
   const [theme, setTheme] = useState("dark");
@@ -666,6 +666,14 @@ export default function Home() {
                         Resume
                       </span>
                     </a>
+                    <motion.div
+                      variants={fadeUpV}
+                      className="relative flex justify-center md:justify-start"
+                    >
+                      <div className="w-10 h-10">
+                        <RubiksCube />
+                      </div>
+                    </motion.div>
                   </motion.div>
                 </motion.div>
 
@@ -845,27 +853,30 @@ export default function Home() {
                 </div>
               </section>
 
-              <section>
-                <motion.div
-                  variants={fadeUpV}
-                  className="relative flex justify-center md:justify-start"
-                >
-                  <div className="w-72 h-72">
-                    <RubiksCube />
-                  </div>
-                </motion.div>
-              </section>
+              {/* SOLAR SYSTEM SECTION */}
+              <motion.section
+                initial={{ opacity: 0, y: reduceMotion ? 0 : 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={
+                  reduceMotion
+                    ? { duration: 0 }
+                    : { duration: 0.55, ease: "easeOut" }
+                }
+                className="space-y-6 scroll-mt-24"
+              >
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-slate-50">
+                    A little corner of the universe
+                  </h3>
+                  <p className="mt-2 text-sm text-slate-800 dark:text-slate-400 max-w-2xl">
+                    When I'm not shipping features, I'm probably thinking about
+                    systems — much like this one.
+                  </p>
+                </div>
 
-              <section>
-                <motion.div
-                  variants={fadeUpV}
-                  className="relative flex justify-center md:justify-start"
-                >
-                  <div className="w-72 h-72">
-                    <SolarSystem />
-                  </div>
-                </motion.div>
-              </section>
+                <SolarSystem />
+              </motion.section>
 
               {/* GitHub snapshot (with input) */}
               <GithubProfileSection defaultUsername="rahul-kapgate" />
