@@ -871,11 +871,13 @@ export default function Home() {
                   </h3>
                   <p className="mt-2 text-sm text-slate-800 dark:text-slate-400 max-w-2xl">
                     When I'm not shipping features, I'm probably thinking about
-                    systems — much like this one.
+                    systems — much like this one. 
                   </p>
                 </div>
 
-                <SolarSystem />
+                <div className="">
+                  <SolarSystem />
+                </div>
               </motion.section>
 
               {/* GitHub snapshot (with input) */}
