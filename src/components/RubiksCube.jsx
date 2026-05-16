@@ -65,7 +65,7 @@ export default function RubiksCube() {
     let raf;
     const animate = () => {
       raf = requestAnimationFrame(animate);
-      if (autoRotate) { group.rotation.y += 0.006; group.rotation.x += 0.002; }
+      if (autoRotate) { group.rotation.y += 0.04; group.rotation.x += 0.04; }
       else if (!isDragging) { velX *= 0.95; velY *= 0.95; group.rotation.x += velX; group.rotation.y += velY; }
       renderer.render(scene, camera);
     };
