@@ -991,7 +991,7 @@ export default function Home() {
                           ArtisticVickey.in
                         </h4>
                         <p className="mt-1 text-xs sm:text-sm text-indigo-600 dark:text-indigo-300 font-medium">
-                          Full-Stack Course + Practice Platform
+                          Production-ready EdTech Platform
                         </p>
                       </div>
 
@@ -1061,6 +1061,25 @@ export default function Home() {
                     </ul>
                   </div>
 
+                  <div className="flex flex-wrap gap-3 text-[11px] text-slate-700 dark:text-slate-300 mt-2">
+                    <a
+                      href="https://github.com/rahul-kapgate/artisticvicky-v2-frontend"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center rounded-full border border-slate-300 px-3 py-1 hover:border-slate-400 hover:bg-slate-100 dark:border-slate-700 dark:hover:border-slate-500 dark:hover:bg-slate-900 transition-colors"
+                    >
+                      Frontend Repo
+                    </a>
+                    <a
+                      href="https://github.com/rahul-kapgate/artisticvicky-v2-backend"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center rounded-full border border-slate-300 px-3 py-1 hover:border-slate-400 hover:bg-slate-100 dark:border-slate-700 dark:hover:border-slate-500 dark:hover:bg-slate-900 transition-colors"
+                    >
+                      Backend Repo
+                    </a>
+                  </div>
+
                   <div className="mt-5 space-y-3">
                     <a
                       href="https://artisticvickey.in/"
@@ -1070,25 +1089,105 @@ export default function Home() {
                     >
                       Visit artisticvickey.in ↗
                     </a>
+                  </div>
+                </motion.div>
 
-                    <div className="flex flex-wrap gap-3 text-[11px] text-slate-700 dark:text-slate-300">
-                      <a
-                        href="https://github.com/rahul-kapgate/artisticvicky-v2-frontend"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center rounded-full border border-slate-300 px-3 py-1 hover:border-slate-400 hover:bg-slate-100 dark:border-slate-700 dark:hover:border-slate-500 dark:hover:bg-slate-900 transition-colors"
-                      >
-                        Frontend Repo
-                      </a>
-                      <a
-                        href="https://github.com/rahul-kapgate/artisticvicky-v2-backend"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center rounded-full border border-slate-300 px-3 py-1 hover:border-slate-400 hover:bg-slate-100 dark:border-slate-700 dark:hover:border-slate-500 dark:hover:bg-slate-900 transition-colors"
-                      >
-                        Backend Repo
-                      </a>
+                <motion.div
+                  initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={
+                    reduceMotion
+                      ? { duration: 0 }
+                      : { duration: 0.45, ease: "easeOut" }
+                  }
+                  whileHover={reduceMotion ? undefined : { y: -2 }}
+                  className="rounded-2xl border border-slate-200 bg-white/80 p-5 sm:p-6 flex flex-col justify-between shadow-sm dark:border-slate-800 dark:bg-slate-900/40 dark:shadow-none transition-colors"
+                >
+                  <div>
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <h4 className="text-base sm:text-lg font-semibold text-slate-900 dark:text-slate-100">
+                          Digital Heroes Golf App
+                        </h4>
+                        <p className="mt-1 text-xs sm:text-sm text-indigo-600 dark:text-indigo-300 font-medium">
+                          Subscription + Score Tracking Platform
+                        </p>
+                      </div>
+
+                      <span className="shrink-0 rounded-full border border-slate-300 bg-slate-100 px-2.5 py-1 text-[10px] sm:text-[11px] font-medium text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                        GitHub
+                      </span>
                     </div>
+
+                    <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                      A full-stack golf platform where users can track golf
+                      scores, join monthly draws, manage subscriptions, and
+                      support charities through a smooth mobile-friendly
+                      experience.
+                    </p>
+
+                    <div className="mt-4 flex flex-wrap gap-2 text-[11px]">
+                      {[
+                        "React",
+                        "Vite",
+                        "TypeScript",
+                        "Node.js",
+                        "Express",
+                        "Supabase",
+                        "PostgreSQL",
+                        "JWT",
+                        "Stripe",
+                      ].map((tech) => (
+                        <span
+                          key={tech}
+                          className="rounded-full border border-slate-300 px-2.5 py-1 text-slate-700 dark:border-slate-700 dark:text-slate-300"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    <ul className="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                      <li>
+                        • Built secure JWT-based authentication for users.
+                      </li>
+                      <li>
+                        • Implemented subscription flows with payment
+                        integration.
+                      </li>
+                      <li>
+                        • Added golf score tracking and recent performance
+                        history.
+                      </li>
+                      <li>
+                        • Developed admin panel for managing users, draws, and
+                        winners.
+                      </li>
+                      <li>
+                        • Designed responsive UI for seamless experience across
+                        mobile and desktop devices.
+                      </li>
+                      <li>
+                        • Integrated backend APIs for real-time data handling
+                        and smooth user interactions.
+                      </li>
+                      <li>
+                        • Ensured secure data handling with validation, error
+                        handling, and role-based access control.
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="mt-5 space-y-3">
+                    <a
+                      href="https://github.com/rahul-kapgate/digital-heroes-golf-app"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex w-full justify-center items-center rounded-full bg-indigo-600 px-4 py-2 text-xs sm:text-sm font-medium text-white hover:bg-indigo-500 transition-colors"
+                    >
+                      View GitHub Repo ↗
+                    </a>
                   </div>
                 </motion.div>
 
@@ -1111,7 +1210,7 @@ export default function Home() {
                           Smart Bookmark App
                         </h4>
                         <p className="mt-1 text-xs sm:text-sm text-indigo-600 dark:text-indigo-300 font-medium">
-                          Private Bookmark Manager
+                          Secure Personal Bookmark Manager
                         </p>
                       </div>
 
