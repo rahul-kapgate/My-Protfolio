@@ -3,128 +3,579 @@ import * as THREE from "three";
 
 export default function SolarSystem() {
   const canvasRef = useRef(null);
+  const containerRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const W = canvas.offsetWidth, H = 420;
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    renderer.setPixelRatio(devicePixelRatio);
-    renderer.setSize(W, H);
-    renderer.setClearColor(0x000000, 0);
+    const container = containerRef.current;
 
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, W / H, 0.1, 1000);
+    if (!canvas || !container) return;
 
-    scene.add(new THREE.AmbientLight(0xffffff, 0.15));
-    const sunLight = new THREE.PointLight(0xfff4e0, 2.5, 80);
-    scene.add(sunLight);
-
-    // Stars
-    const starGeo = new THREE.BufferGeometry();
-    const pos = [];
-    for (let i = 0; i < 1800; i++)
-      pos.push((Math.random()-0.5)*300, (Math.random()-0.5)*300, (Math.random()-0.5)*300);
-    starGeo.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
-    scene.add(new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xffffff, size: 0.25 })));
-
-    // Sun
-    const sunMesh = new THREE.Mesh(
-      new THREE.SphereGeometry(1.6, 32, 32),
-      new THREE.MeshStandardMaterial({ color: 0xffd166, emissive: 0xffa500, emissiveIntensity: 1.2 })
-    );
-    scene.add(sunMesh);
-
-    const PLANETS = [
-      { r: 0.28, color: 0xb0b0b0, dist: 3.2,  speed: 2.4 },
-      { r: 0.48, color: 0xe8c07a, dist: 5.0,  speed: 1.6 },
-      { r: 0.52, color: 0x4a90d9, dist: 7.2,  speed: 1.0, moon: true },
-      { r: 0.35, color: 0xc1440e, dist: 9.5,  speed: 0.65 },
-      { r: 0.95, color: 0xe8d5a3, dist: 13.0, speed: 0.28 },
-      { r: 0.82, color: 0xf0e68c, dist: 17.0, speed: 0.18, rings: true },
-    ];
-
-    const groups = PLANETS.map(p => {
-      const orb = new THREE.Mesh(
-        new THREE.RingGeometry(p.dist - 0.02, p.dist + 0.02, 80),
-        new THREE.MeshBasicMaterial({ color: 0x334455, side: THREE.DoubleSide, transparent: true, opacity: 0.35 })
-      );
-      orb.rotation.x = Math.PI / 2;
-      scene.add(orb);
-
-      const g = new THREE.Group();
-      const mesh = new THREE.Mesh(new THREE.SphereGeometry(p.r, 32, 32),
-        new THREE.MeshStandardMaterial({ color: p.color, roughness: 0.8 }));
-      mesh.position.x = p.dist;
-      g.add(mesh);
-
-      if (p.moon) {
-        const moon = new THREE.Mesh(new THREE.SphereGeometry(0.13, 16, 16),
-          new THREE.MeshStandardMaterial({ color: 0xcccccc }));
-        moon.position.x = 0.9;
-        const mg = new THREE.Group();
-        mg.add(moon);
-        mg.position.x = p.dist;
-        g.moonGroup = mg;
-        g.add(mg);
-      }
-      if (p.rings) {
-        const ring = new THREE.Mesh(new THREE.RingGeometry(p.r*1.4, p.r*2.2, 64),
-          new THREE.MeshBasicMaterial({ color: 0xd4b483, side: THREE.DoubleSide, transparent: true, opacity: 0.7 }));
-        ring.rotation.x = Math.PI / 2.5;
-        ring.position.x = p.dist;
-        g.add(ring);
-      }
-      scene.add(g);
-      return { g, p, angle: Math.random() * Math.PI * 2 };
+    /* =========================================================
+        RENDERER
+    ========================================================= */
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: true,
+      alpha: true,
     });
 
-    let isDragging = false, px = 0, py = 0;
-    let theta = 0, phi = 0.18, dist = 18, velT = 0, velP = 0, t = 0, moonA = 0;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 0);
 
-    const onDown = e => { isDragging = true; px = e.clientX; py = e.clientY; velT = velP = 0; };
-    const onUp = () => { isDragging = false; };
-    const onMove = e => {
-      if (!isDragging) return;
-      velT = (e.clientX - px) * 0.008; velP = (e.clientY - py) * 0.005;
-      theta += velT; phi = Math.max(0.05, Math.min(1.3, phi + velP));
-      px = e.clientX; py = e.clientY;
-    };
-    const onWheel = e => { dist = Math.max(6, Math.min(35, dist + e.deltaY * 0.02)); };
+    /* =========================================================
+        SCENE + CAMERA
+    ========================================================= */
+    const scene = new THREE.Scene();
 
-    canvas.addEventListener("mousedown", onDown);
-    window.addEventListener("mouseup", onUp);
-    window.addEventListener("mousemove", onMove);
-    canvas.addEventListener("wheel", onWheel, { passive: true });
+    const camera = new THREE.PerspectiveCamera(
+      55,
+      1,
+      0.1,
+      1000,
+    );
 
-    let raf;
-    const animate = () => {
-      raf = requestAnimationFrame(animate);
-      t += 0.008; moonA += 0.04;
-      sunMesh.rotation.y += 0.003;
-      groups.forEach(({ g, p, angle }) => {
-        g.rotation.y = angle + t * p.speed;
-        if (g.moonGroup) g.moonGroup.rotation.y = moonA;
-      });
-      if (!isDragging) { velT *= 0.93; theta += velT * 0.3; }
-      camera.position.set(
-        dist * Math.sin(phi) * Math.sin(theta),
-        dist * Math.cos(phi),
-        dist * Math.sin(phi) * Math.cos(theta)
+    /* =========================================================
+        LIGHTING
+    ========================================================= */
+    scene.add(new THREE.AmbientLight(0xffffff, 0.2));
+
+    const sunLight = new THREE.PointLight(
+      0xffe8b0,
+      3.2,
+      100,
+    );
+
+    scene.add(sunLight);
+
+    /* =========================================================
+        STARS
+    ========================================================= */
+    const starGeometry = new THREE.BufferGeometry();
+    const starPositions = [];
+
+    for (let i = 0; i < 1000; i++) {
+      starPositions.push(
+        (Math.random() - 0.5) * 240,
+        (Math.random() - 0.5) * 160,
+        (Math.random() - 0.5) * 240,
       );
+    }
+
+    starGeometry.setAttribute(
+      "position",
+      new THREE.Float32BufferAttribute(
+        starPositions,
+        3,
+      ),
+    );
+
+    const starMaterial = new THREE.PointsMaterial({
+      color: 0xffffff,
+      size: 0.12,
+      transparent: true,
+      opacity: 0.45,
+    });
+
+    const stars = new THREE.Points(
+      starGeometry,
+      starMaterial,
+    );
+
+    scene.add(stars);
+
+    /* =========================================================
+        SUN
+    ========================================================= */
+    const sunGeometry = new THREE.SphereGeometry(
+      1.5,
+      40,
+      40,
+    );
+
+    const sunMaterial = new THREE.MeshStandardMaterial({
+      color: 0xffd166,
+      emissive: 0xff9900,
+      emissiveIntensity: 1.5,
+      roughness: 0.7,
+    });
+
+    const sun = new THREE.Mesh(
+      sunGeometry,
+      sunMaterial,
+    );
+
+    scene.add(sun);
+
+    /* =========================================================
+        PLANETS
+    ========================================================= */
+    const planets = [
+      {
+        radius: 0.22,
+        color: 0xa8a8a8,
+        distance: 3,
+        speed: 2.4,
+      },
+      {
+        radius: 0.4,
+        color: 0xd6b071,
+        distance: 4.4,
+        speed: 1.6,
+      },
+      {
+        radius: 0.44,
+        color: 0x4a7eb8,
+        distance: 6,
+        speed: 1,
+        moon: true,
+      },
+      {
+        radius: 0.32,
+        color: 0xad4a2c,
+        distance: 7.8,
+        speed: 0.7,
+      },
+      {
+        radius: 0.82,
+        color: 0xd2b48c,
+        distance: 10.5,
+        speed: 0.32,
+      },
+      {
+        radius: 0.72,
+        color: 0xd6c584,
+        distance: 13.5,
+        speed: 0.22,
+        rings: true,
+      },
+      {
+        radius: 0.55,
+        color: 0x75a8b8,
+        distance: 16,
+        speed: 0.15,
+      },
+      {
+        radius: 0.52,
+        color: 0x4267a8,
+        distance: 18,
+        speed: 0.1,
+      },
+    ];
+
+    const disposableObjects = [];
+
+    const planetGroups = planets.map((planet) => {
+      /* Orbit */
+      const orbitGeometry = new THREE.RingGeometry(
+        planet.distance - 0.012,
+        planet.distance + 0.012,
+        128,
+      );
+
+      const orbitMaterial =
+        new THREE.MeshBasicMaterial({
+          color: 0xffffff,
+          side: THREE.DoubleSide,
+          transparent: true,
+          opacity: 0.07,
+        });
+
+      const orbit = new THREE.Mesh(
+        orbitGeometry,
+        orbitMaterial,
+      );
+
+      orbit.rotation.x = Math.PI / 2;
+
+      scene.add(orbit);
+
+      disposableObjects.push(
+        orbitGeometry,
+        orbitMaterial,
+      );
+
+      /* Planet container */
+      const group = new THREE.Group();
+
+      /* Planet */
+      const planetGeometry =
+        new THREE.SphereGeometry(
+          planet.radius,
+          32,
+          32,
+        );
+
+      const planetMaterial =
+        new THREE.MeshStandardMaterial({
+          color: planet.color,
+          roughness: 0.85,
+          metalness: 0.02,
+        });
+
+      const planetMesh = new THREE.Mesh(
+        planetGeometry,
+        planetMaterial,
+      );
+
+      planetMesh.position.x =
+        planet.distance;
+
+      group.add(planetMesh);
+
+      disposableObjects.push(
+        planetGeometry,
+        planetMaterial,
+      );
+
+      /* Moon */
+      if (planet.moon) {
+        const moonGroup = new THREE.Group();
+
+        moonGroup.position.x =
+          planet.distance;
+
+        const moonGeometry =
+          new THREE.SphereGeometry(
+            0.11,
+            16,
+            16,
+          );
+
+        const moonMaterial =
+          new THREE.MeshStandardMaterial({
+            color: 0xbcbcbc,
+            roughness: 1,
+          });
+
+        const moon = new THREE.Mesh(
+          moonGeometry,
+          moonMaterial,
+        );
+
+        moon.position.x = 0.75;
+
+        moonGroup.add(moon);
+        group.add(moonGroup);
+
+        group.userData.moonGroup =
+          moonGroup;
+
+        disposableObjects.push(
+          moonGeometry,
+          moonMaterial,
+        );
+      }
+
+      /* Saturn rings */
+      if (planet.rings) {
+        const ringGeometry =
+          new THREE.RingGeometry(
+            planet.radius * 1.4,
+            planet.radius * 2.1,
+            64,
+          );
+
+        const ringMaterial =
+          new THREE.MeshBasicMaterial({
+            color: 0xbfa77a,
+            side: THREE.DoubleSide,
+            transparent: true,
+            opacity: 0.55,
+          });
+
+        const ring = new THREE.Mesh(
+          ringGeometry,
+          ringMaterial,
+        );
+
+        ring.position.x =
+          planet.distance;
+
+        ring.rotation.x =
+          Math.PI / 2.6;
+
+        group.add(ring);
+
+        disposableObjects.push(
+          ringGeometry,
+          ringMaterial,
+        );
+      }
+
+      scene.add(group);
+
+      return {
+        group,
+        planet,
+        angle:
+          Math.random() * Math.PI * 2,
+      };
+    });
+
+    /* =========================================================
+        CAMERA CONTROLS
+    ========================================================= */
+    let dragging = false;
+
+    let previousX = 0;
+    let previousY = 0;
+
+    let theta = 0;
+    let phi = 0.55;
+    let distance = 23;
+
+    let velocityTheta = 0;
+    let velocityPhi = 0;
+
+    let time = 0;
+    let moonAngle = 0;
+
+    const handlePointerDown = (event) => {
+      dragging = true;
+
+      previousX = event.clientX;
+      previousY = event.clientY;
+
+      velocityTheta = 0;
+      velocityPhi = 0;
+
+      canvas.setPointerCapture?.(
+        event.pointerId,
+      );
+    };
+
+    const handlePointerMove = (event) => {
+      if (!dragging) return;
+
+      const deltaX =
+        event.clientX - previousX;
+
+      const deltaY =
+        event.clientY - previousY;
+
+      velocityTheta = deltaX * 0.006;
+      velocityPhi = deltaY * 0.004;
+
+      theta += velocityTheta;
+
+      phi = Math.max(
+        0.25,
+        Math.min(
+          1.25,
+          phi + velocityPhi,
+        ),
+      );
+
+      previousX = event.clientX;
+      previousY = event.clientY;
+    };
+
+    const handlePointerUp = () => {
+      dragging = false;
+    };
+
+    const handleWheel = (event) => {
+      distance = Math.max(
+        15,
+        Math.min(
+          32,
+          distance + event.deltaY * 0.015,
+        ),
+      );
+    };
+
+    canvas.addEventListener(
+      "pointerdown",
+      handlePointerDown,
+    );
+
+    window.addEventListener(
+      "pointermove",
+      handlePointerMove,
+    );
+
+    window.addEventListener(
+      "pointerup",
+      handlePointerUp,
+    );
+
+    canvas.addEventListener(
+      "wheel",
+      handleWheel,
+      {
+        passive: true,
+      },
+    );
+
+    /* =========================================================
+        RESPONSIVE SIZE
+    ========================================================= */
+    const resize = () => {
+      const width =
+        container.clientWidth;
+
+      const height =
+        container.clientHeight;
+
+      renderer.setSize(
+        width,
+        height,
+        false,
+      );
+
+      camera.aspect = width / height;
+
+      camera.updateProjectionMatrix();
+    };
+
+    const resizeObserver =
+      new ResizeObserver(resize);
+
+    resizeObserver.observe(container);
+
+    resize();
+
+    /* =========================================================
+        ANIMATION
+    ========================================================= */
+    let animationFrame;
+
+    const animate = () => {
+      animationFrame =
+        requestAnimationFrame(animate);
+
+      time += 0.008;
+      moonAngle += 0.035;
+
+      sun.rotation.y += 0.002;
+
+      stars.rotation.y += 0.00004;
+
+      planetGroups.forEach(
+        ({
+          group,
+          planet,
+          angle,
+        }) => {
+          group.rotation.y =
+            angle +
+            time * planet.speed;
+
+          if (
+            group.userData.moonGroup
+          ) {
+            group.userData.moonGroup.rotation.y =
+              moonAngle;
+          }
+        },
+      );
+
+      if (!dragging) {
+        velocityTheta *= 0.92;
+        velocityPhi *= 0.92;
+
+        theta +=
+          velocityTheta * 0.3;
+
+        phi +=
+          velocityPhi * 0.15;
+
+        phi = Math.max(
+          0.25,
+          Math.min(1.25, phi),
+        );
+      }
+
+      camera.position.set(
+        distance *
+          Math.sin(phi) *
+          Math.sin(theta),
+
+        distance *
+          Math.cos(phi),
+
+        distance *
+          Math.sin(phi) *
+          Math.cos(theta),
+      );
+
       camera.lookAt(0, 0, 0);
+
       renderer.render(scene, camera);
     };
+
     animate();
 
+    /* =========================================================
+        CLEANUP
+    ========================================================= */
     return () => {
-      cancelAnimationFrame(raf);
-      canvas.removeEventListener("mousedown", onDown);
-      window.removeEventListener("mouseup", onUp);
-      window.removeEventListener("mousemove", onMove);
-      canvas.removeEventListener("wheel", onWheel);
+      cancelAnimationFrame(
+        animationFrame,
+      );
+
+      resizeObserver.disconnect();
+
+      canvas.removeEventListener(
+        "pointerdown",
+        handlePointerDown,
+      );
+
+      window.removeEventListener(
+        "pointermove",
+        handlePointerMove,
+      );
+
+      window.removeEventListener(
+        "pointerup",
+        handlePointerUp,
+      );
+
+      canvas.removeEventListener(
+        "wheel",
+        handleWheel,
+      );
+
+      starGeometry.dispose();
+      starMaterial.dispose();
+
+      sunGeometry.dispose();
+      sunMaterial.dispose();
+
+      disposableObjects.forEach(
+        (resource) => {
+          resource.dispose?.();
+        },
+      );
+
       renderer.dispose();
     };
   }, []);
 
-  return <canvas ref={canvasRef} style={{ width: "100%", height: "100%", display: "block" }} />;
+  return (
+    <div
+      ref={containerRef}
+      className="
+        relative
+        h-[360px]
+        w-full
+        overflow-hidden
+        sm:h-[440px]
+        lg:h-[520px]
+      "
+    >
+      {/* Helper */}
+      <div className="pointer-events-none absolute bottom-4 left-1/2 z-10 -translate-x-1/2">
+        <p className="whitespace-nowrap text-[10px] uppercase tracking-[0.14em] text-zinc-700">
+          Drag to explore · Scroll to zoom
+        </p>
+      </div>
+
+      <canvas
+        ref={canvasRef}
+        className="block h-full w-full cursor-grab active:cursor-grabbing"
+      />
+    </div>
+  );
 }
