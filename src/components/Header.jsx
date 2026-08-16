@@ -135,6 +135,17 @@ export default function ResponsiveCircularHeader() {
 
                 {/* Right Side */}
                 <div className="flex items-center gap-2">
+                  {/* Resume */}
+                  <a
+                    href="/rahul-kapgate-resume.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hidden h-10 items-center rounded-full border border-white/[0.1] px-4 text-xs font-medium text-zinc-400 transition duration-200 hover:border-white/20 hover:bg-white/[0.05] hover:text-white sm:inline-flex"
+                  >
+                    Resume
+                  </a>
+
+                  {/* Contact */}
                   <a
                     href="mailto:rahulkapgateyt@gmail.com"
                     className="hidden h-10 items-center rounded-full border border-white/[0.1] px-4 text-xs font-medium text-zinc-400 transition duration-200 hover:border-white/20 hover:bg-white/[0.05] hover:text-white sm:inline-flex"
@@ -215,13 +226,24 @@ export default function ResponsiveCircularHeader() {
                       })}
                     </div>
 
-                    {/* Contact inside menu for small mobile */}
-                    <a
-                      href="mailto:rahulkapgateyt@gmail.com"
-                      className="mt-2 flex h-11 w-full items-center justify-center rounded-full border border-white/[0.1] text-xs font-medium text-zinc-400 transition hover:border-white/20 hover:bg-white/[0.05] hover:text-white sm:hidden"
-                    >
-                      Contact
-                    </a>
+                    {/* Mobile actions */}
+                    <div className="mt-2 grid grid-cols-2 gap-2 sm:hidden">
+                      <a
+                        href="/rahul-kapgate-resume.pdf"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex h-11 items-center justify-center rounded-full border border-white/[0.1] text-xs font-medium text-zinc-400 transition hover:border-white/20 hover:bg-white/[0.05] hover:text-white"
+                      >
+                        Resume
+                      </a>
+
+                      <a
+                        href="mailto:rahulkapgateyt@gmail.com"
+                        className="flex h-11 items-center justify-center rounded-full border border-white/[0.1] text-xs font-medium text-zinc-400 transition hover:border-white/20 hover:bg-white/[0.05] hover:text-white"
+                      >
+                        Contact
+                      </a>
+                    </div>
                   </motion.nav>
                 )}
               </AnimatePresence>
