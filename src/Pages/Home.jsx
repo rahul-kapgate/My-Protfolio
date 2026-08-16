@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Preloader from "../components/Preloader";
+import Preloader from "../components/NewPreloader";
 import HeroSection from "../components/HeroSection";
 import AboutSection from "../components/AboutSection";
 import ExperienceSection from "../components/ExperienceSection";
@@ -10,6 +10,7 @@ import SEOHead from "../components/SEOHead";
 import SkillsSection from "../components/SkillsSection";
 import ProjectsSection from "../components/ProjectsSection";
 import SolarSystemSection from "../components/SolarSystemSection";
+import Header from "../components/Header";
 
 const Home = () => {
   const [preloaderComplete, setPreloaderComplete] = useState(false);
@@ -21,6 +22,8 @@ const Home = () => {
           setPreloaderComplete(true);
         }}
       />
+
+      <Header />
 
       <HeroSection isReady={preloaderComplete} />
 
