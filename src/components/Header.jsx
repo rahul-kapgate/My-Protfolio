@@ -10,6 +10,7 @@ const navItems = [
   { label: "Skills", id: "skills" },
   { label: "Projects", id: "projects" },
   { label: "Playground", id: "playground" },
+  { label: "Contact", id: "contact" },
 ];
 
 export default function ResponsiveCircularHeader() {

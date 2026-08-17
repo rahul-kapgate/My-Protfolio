@@ -1,5 +1,3 @@
-// src/components/ProjectsSection.jsx
-
 import React, { useEffect, useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 
@@ -9,114 +7,105 @@ const projects = [
     title: "ArtisticVickey.in",
     type: "Production EdTech Platform",
     status: "Live",
-    description:
-      "A full-stack MAH AAC CET coaching platform bringing courses, resources, video lectures, mock tests and PYQ practice into one structured learning experience.",
-
-    tech: [
-      "React",
-      "TypeScript",
-      "Tailwind CSS",
-      "TanStack Query",
-      "Node.js",
-      "Express",
-      "Supabase",
-      "AWS S3",
-      "Razorpay",
-    ],
-
+    image: "/projects/artistic-vickey.webp",
+    description: "A full-stack MAH AAC CET coaching platform bringing courses, resources, video lectures, mock tests and PYQ practice into one structured learning experience.",
+    challenge: "Bring course discovery, learning resources, assessments and paid enrollment into one coherent student experience.",
+    build: "Responsive course flows, authenticated learning experiences, timed assessments, admin controls and payment enrollment workflows.",
+    outcome: "A production EdTech platform that supports the complete learning journey from discovery to enrolled-course access.",
+    tech: ["React", "TypeScript", "Tailwind CSS", "TanStack Query", "Node.js", "Express", "Supabase", "AWS S3", "Razorpay"],
     points: [
       "Built responsive course catalog, pricing and authenticated enrolled-course experiences.",
       "Created learning flows for resources, video lectures, mock tests and PYQ practice.",
       "Developed a timed assessment engine with scoring and detailed attempt review.",
       "Implemented authentication, admin controls and secure payment enrollment workflows.",
     ],
-
     links: [
-      {
-        label: "Visit live",
-        href: "https://artisticvickey.in/",
-      },
-      {
-        label: "Frontend",
-        href: "https://github.com/rahul-kapgate/artisticvicky-v2-frontend",
-      },
-      {
-        label: "Backend",
-        href: "https://github.com/rahul-kapgate/artisticvicky-v2-backend",
-      },
+      { label: "Visit live", href: "https://artisticvickey.in/" },
+      { label: "Frontend", href: "https://github.com/rahul-kapgate/artisticvicky-v2-frontend" },
+      { label: "Backend", href: "https://github.com/rahul-kapgate/artisticvicky-v2-backend" },
     ],
   },
-
   {
     number: "02",
     title: "Digital Heroes Golf App",
     type: "Subscription + Score Tracking Platform",
     status: "GitHub",
-
-    description:
-      "A full-stack golf platform for tracking scores, managing subscriptions, joining monthly draws and supporting charities through a mobile-friendly experience.",
-
-    tech: [
-      "React",
-      "Vite",
-      "TypeScript",
-      "Node.js",
-      "Express",
-      "Supabase",
-      "PostgreSQL",
-      "JWT",
-      "Stripe",
-    ],
-
+    image: "/projects/digital-heroes.webp",
+    description: "A full-stack golf platform for tracking scores, managing subscriptions, joining monthly draws and supporting charities through a mobile-friendly experience.",
+    challenge: "Combine membership, score tracking, draws and administration without making the user flow feel fragmented.",
+    build: "JWT authentication, subscription flows, golf score history and administration workflows for users, draws and winners.",
+    outcome: "A full-stack product architecture that connects customer-facing golf features with secure operational workflows.",
+    tech: ["React", "Vite", "TypeScript", "Node.js", "Express", "Supabase", "PostgreSQL", "JWT", "Stripe"],
     points: [
       "Implemented JWT-based authentication and protected application workflows.",
       "Built subscription and payment flows.",
       "Added golf score tracking and recent performance history.",
       "Developed administration workflows for users, draws and winners.",
     ],
-
-    links: [
-      {
-        label: "View repository",
-        href: "https://github.com/rahul-kapgate/digital-heroes-golf-app",
-      },
-    ],
+    links: [{ label: "View repository", href: "https://github.com/rahul-kapgate/digital-heroes-golf-app" }],
   },
-
   {
     number: "03",
     title: "Smart Bookmark App",
     type: "Secure Personal Bookmark Manager",
     status: "GitHub",
-
-    description:
-      "A Next.js and Supabase bookmark application where users can securely save private bookmarks, authenticate with Google and keep data synchronized across browser tabs.",
-
-    tech: [
-      "Next.js",
-      "App Router",
-      "TypeScript",
-      "Tailwind CSS",
-      "Supabase Auth",
-      "PostgreSQL",
-      "Realtime",
-    ],
-
+    image: "/projects/smart-bookmark.webp",
+    description: "A Next.js and Supabase bookmark application where users can securely save private bookmarks, authenticate with Google and keep data synchronized across browser tabs.",
+    challenge: "Keep personal bookmark data private while maintaining a simple realtime experience across browser tabs.",
+    build: "Google OAuth, secure callback handling, Row Level Security and realtime synchronization with the Next.js App Router.",
+    outcome: "A compact example of secure user-scoped data, realtime state synchronization and modern authentication patterns.",
+    tech: ["Next.js", "App Router", "TypeScript", "Tailwind CSS", "Supabase Auth", "PostgreSQL", "Realtime"],
     points: [
       "Implemented Google OAuth authentication with secure callback handling.",
       "Used Row Level Security to isolate bookmarks by user.",
       "Added realtime bookmark synchronization across browser tabs.",
       "Handled App Router cookies, OAuth redirects and realtime authentication state.",
     ],
-
-    links: [
-      {
-        label: "View repository",
-        href: "https://github.com/rahul-kapgate/smart-bookmark-app",
-      },
-    ],
+    links: [{ label: "View repository", href: "https://github.com/rahul-kapgate/smart-bookmark-app" }],
   },
 ];
+
+function ProjectPreview({ project }) {
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <div className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0d0d0d]">
+      <div className="flex h-9 items-center gap-1.5 border-b border-white/[0.07] px-4">
+        <span className="h-1.5 w-1.5 rounded-full bg-zinc-700" />
+        <span className="h-1.5 w-1.5 rounded-full bg-zinc-700" />
+        <span className="h-1.5 w-1.5 rounded-full bg-zinc-700" />
+        <span className="ml-3 truncate font-mono text-[8px] text-zinc-700">{project.title.toLowerCase().replaceAll(" ", "-")}</span>
+      </div>
+
+      {!failed ? (
+        <img
+          src={project.image}
+          alt={`${project.title} project preview`}
+          loading="lazy"
+          onError={() => setFailed(true)}
+          className="aspect-[16/9] w-full object-cover object-top"
+        />
+      ) : (
+        <div className="relative aspect-[16/9] overflow-hidden p-5 sm:p-7">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(255,255,255,0.05),transparent_38%)]" />
+          <div className="relative h-full rounded-xl border border-white/[0.07] bg-white/[0.018] p-4">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-zinc-700">Product preview</span>
+              <span className="rounded-full border border-white/[0.07] px-2 py-1 font-mono text-[7px] uppercase text-zinc-600">{project.status}</span>
+            </div>
+            <p className="mt-5 max-w-[75%] text-lg font-medium tracking-[-0.025em] text-zinc-200 sm:text-2xl">{project.title}</p>
+            <p className="mt-2 max-w-[70%] text-[10px] leading-5 text-zinc-600 sm:text-xs">{project.type}</p>
+            <div className="absolute bottom-4 left-4 right-4 grid grid-cols-3 gap-2">
+              {project.tech.slice(0, 3).map((tech) => (
+                <div key={tech} className="rounded-md border border-white/[0.06] bg-black/20 px-2 py-2 font-mono text-[7px] text-zinc-600 sm:text-[8px]">{tech}</div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function ProjectsSection() {
   const sectionRef = useRef(null);
@@ -124,239 +113,114 @@ export default function ProjectsSection() {
 
   useEffect(() => {
     const section = sectionRef.current;
-
     if (!section) return;
-
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      {
-        threshold: 0.1,
-      },
+      ([entry]) => entry.isIntersecting && setIsVisible(true),
+      { threshold: 0.08 },
     );
-
     observer.observe(section);
-
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section
-      id="projects"
-      ref={sectionRef}
-      className="relative min-h-[100dvh] overflow-hidden bg-[#0a0a0a] text-white"
-    >
-      {/* Background */}
+    <section id="projects" ref={sectionRef} className="relative min-h-[100dvh] overflow-hidden bg-[#0a0a0a] text-white">
       <div className="pointer-events-none absolute inset-0">
-        <div
-          className="absolute inset-0 opacity-[0.025]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px)",
-            backgroundSize: "100% 80px",
-          }}
-        />
-
-        <div className="absolute right-[10%] top-[35%] h-[500px] w-[500px] rounded-full bg-white/[0.01] blur-[120px]" />
+        <div className="absolute right-[-5%] top-[20%] h-[600px] w-[600px] rounded-full bg-white/[0.012] blur-[150px]" />
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 py-24 sm:px-8 lg:px-12 lg:py-28">
-        {/* Label */}
-        <div
-          className={`mb-8 flex items-center gap-3 transition-all duration-700 ${
-            isVisible
-              ? "translate-y-0 opacity-100"
-              : "translate-y-3 opacity-0"
-          }`}
-        >
-          <span className="text-xs font-medium uppercase tracking-[0.16em] text-zinc-500">
-            Projects
-          </span>
-
+        <div className={`mb-8 flex items-center gap-3 transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"}`}>
+          <span className="text-xs font-medium uppercase tracking-[0.16em] text-zinc-500">Projects</span>
           <span className="h-px w-12 bg-white/10" />
+          <span className="font-mono text-[9px] text-zinc-700">case studies / 03</span>
         </div>
 
-        {/* Heading */}
         <div className="max-w-5xl">
           <div className="overflow-hidden">
-            <h2
-              className={`text-[38px] font-semibold leading-[1.08] tracking-[-0.045em] text-zinc-100 transition-all delay-100 duration-1000 sm:text-5xl md:text-6xl lg:text-[70px] ${
-                isVisible
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-10 opacity-0"
-              }`}
-            >
-              Selected projects
-            </h2>
+            <h2 className={`text-[38px] font-semibold leading-[1.08] tracking-[-0.045em] text-zinc-100 transition-all delay-100 duration-1000 sm:text-5xl md:text-6xl lg:text-[70px] ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}>Selected projects</h2>
           </div>
-
           <div className="overflow-hidden">
-            <p
-              className={`text-[38px] font-semibold leading-[1.08] tracking-[-0.045em] text-zinc-500 transition-all delay-200 duration-1000 sm:text-5xl md:text-6xl lg:text-[70px] ${
-                isVisible
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-10 opacity-0"
-              }`}
-            >
-              built from end to end.
-            </p>
+            <p className={`text-[38px] font-semibold leading-[1.08] tracking-[-0.045em] text-zinc-500 transition-all delay-200 duration-1000 sm:text-5xl md:text-6xl lg:text-[70px] ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}>built from end to end.</p>
           </div>
         </div>
 
-        <p
-          className={`mt-8 max-w-2xl text-sm leading-7 text-zinc-500 transition-all delay-300 duration-700 sm:text-base ${
-            isVisible
-              ? "translate-y-0 opacity-100"
-              : "translate-y-5 opacity-0"
-          }`}
-        >
-          A few projects that best represent the kind of products and
-          engineering problems I enjoy working on.
+        <p className={`mt-8 max-w-2xl text-sm leading-7 text-zinc-500 transition-all delay-300 duration-700 sm:text-base ${isVisible ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"}`}>
+          A few projects that best represent the kind of products and engineering problems I enjoy working on.
         </p>
 
-        {/* Divider */}
-        <div
-          className={`mt-10 h-px w-full max-w-6xl bg-white/[0.08] transition-all delay-300 duration-1000 ${
-            isVisible
-              ? "scale-x-100 opacity-100"
-              : "scale-x-0 opacity-0"
-          }`}
-          style={{
-            transformOrigin: "left",
-          }}
-        />
+        <div className={`mt-10 h-px w-full max-w-6xl bg-white/[0.08] transition-all delay-300 duration-1000 ${isVisible ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"}`} style={{ transformOrigin: "left" }} />
 
-        {/* Projects */}
         <div className="max-w-6xl">
           {projects.map((project, index) => (
-            <article
-              key={project.title}
-              className={`grid gap-7 border-b border-white/[0.08] py-10 transition-all duration-700 lg:grid-cols-[0.38fr_1fr] lg:gap-16 lg:py-12 ${
-                isVisible
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-7 opacity-0"
-              }`}
-              style={{
-                transitionDelay: `${350 + index * 120}ms`,
-              }}
-            >
-              {/* Left */}
-              <div>
-                <span className="text-xs text-zinc-700">
-                  {project.number}
-                </span>
+            <article key={project.title} className={`border-b border-white/[0.08] py-12 transition-all duration-700 lg:py-16 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`} style={{ transitionDelay: `${350 + index * 130}ms` }}>
+              <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14">
+                <div>
+                  <div className="mb-4 flex items-center justify-between">
+                    <span className="font-mono text-[9px] text-zinc-700">{project.number} / 03</span>
+                    <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-zinc-600">{project.status}</span>
+                  </div>
+                  <ProjectPreview project={project} />
+                </div>
 
-                <p className="mt-4 text-xs uppercase tracking-[0.12em] text-zinc-600">
-                  {project.status}
-                </p>
-              </div>
-
-              {/* Right */}
-              <div>
-                {/* Header */}
-                <div className="flex flex-wrap items-start justify-between gap-5">
-                  <div>
-                    <h3 className="text-xl font-medium tracking-[-0.025em] text-zinc-100 sm:text-2xl">
-                      {project.title}
-                    </h3>
-
-                    <p className="mt-1.5 text-xs text-zinc-500 sm:text-sm">
-                      {project.type}
-                    </p>
+                <div className="flex flex-col justify-center">
+                  <div className="flex flex-wrap items-start justify-between gap-5">
+                    <div>
+                      <h3 className="text-2xl font-medium tracking-[-0.03em] text-zinc-100 sm:text-3xl">{project.title}</h3>
+                      <p className="mt-1.5 text-xs text-zinc-500 sm:text-sm">{project.type}</p>
+                    </div>
+                    <div className="flex flex-wrap gap-4">
+                      {project.links.map((link) => (
+                        <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-1.5 text-xs text-zinc-500 transition hover:text-white">
+                          {link.label}
+                          <ArrowUpRight size={11} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        </a>
+                      ))}
+                    </div>
                   </div>
 
-                  <div className="flex flex-wrap gap-4">
-                    {project.links.map((link) => (
-                      <a
-                        key={link.label}
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group inline-flex items-center gap-1.5 text-xs text-zinc-500 transition hover:text-white"
-                      >
-                        {link.label}
+                  <p className="mt-6 text-sm leading-7 text-zinc-400 sm:text-base">{project.description}</p>
 
-                        <ArrowUpRight
-                          size={11}
-                          className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                        />
-                      </a>
+                  <div className="mt-7 grid gap-5 sm:grid-cols-3">
+                    {[
+                      ["Problem", project.challenge],
+                      ["Build", project.build],
+                      ["Result", project.outcome],
+                    ].map(([label, text]) => (
+                      <div key={label} className="border-t border-white/[0.07] pt-4">
+                        <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-zinc-700">{label}</p>
+                        <p className="mt-2 text-xs leading-5 text-zinc-500">{text}</p>
+                      </div>
                     ))}
                   </div>
-                </div>
 
-                {/* Description */}
-                <p className="mt-6 max-w-3xl text-sm leading-7 text-zinc-400 sm:text-base">
-                  {project.description}
-                </p>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {project.tech.map((tech) => (
+                      <span key={tech} className="rounded-full border border-white/[0.06] px-2.5 py-1 text-[9px] text-zinc-600 sm:text-[10px]">{tech}</span>
+                    ))}
+                  </div>
 
-                {/* Tech */}
-                <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2">
-                  {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-[10px] text-zinc-600 sm:text-xs"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Work */}
-                <div className="mt-7 grid gap-0 sm:grid-cols-2">
-                  {project.points.map((point, pointIndex) => (
-                    <div
-                      key={point}
-                      className={`border-t border-white/[0.07] py-4 ${
-                        pointIndex % 2 === 0
-                          ? "sm:pr-8"
-                          : "sm:pl-8"
-                      }`}
-                    >
-                      <div className="flex gap-3">
-                        <span className="pt-[2px] text-[9px] text-zinc-700">
-                          0{pointIndex + 1}
-                        </span>
-
-                        <p className="text-xs leading-5 text-zinc-500 sm:text-sm sm:leading-6">
-                          {point}
-                        </p>
-                      </div>
+                  <details className="group mt-6 border-t border-white/[0.07] pt-4">
+                    <summary className="cursor-pointer list-none text-xs text-zinc-500 transition hover:text-zinc-200">Engineering details <span className="ml-1 text-zinc-700 group-open:hidden">+</span><span className="ml-1 hidden text-zinc-700 group-open:inline">−</span></summary>
+                    <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                      {project.points.map((point, pointIndex) => (
+                        <div key={point} className="flex gap-3 rounded-lg border border-white/[0.05] bg-white/[0.012] p-3">
+                          <span className="font-mono text-[8px] text-zinc-700">0{pointIndex + 1}</span>
+                          <p className="text-xs leading-5 text-zinc-500">{point}</p>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  </details>
                 </div>
               </div>
             </article>
           ))}
         </div>
 
-        {/* Bottom */}
-        <div
-          className={`mt-7 flex max-w-6xl flex-wrap items-center justify-between gap-4 transition-all delay-700 duration-700 ${
-            isVisible
-              ? "translate-y-0 opacity-100"
-              : "translate-y-3 opacity-0"
-          }`}
-        >
-          <p className="text-xs text-zinc-700">
-            More projects are available on GitHub.
-          </p>
-
-          <a
-            href="https://github.com/rahul-kapgate?tab=repositories"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-1.5 text-xs text-zinc-500 transition hover:text-white"
-          >
+        <div className={`mt-7 flex max-w-6xl flex-wrap items-center justify-between gap-4 transition-all delay-700 duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"}`}>
+          <p className="text-xs text-zinc-700">More projects are available on GitHub.</p>
+          <a href="https://github.com/rahul-kapgate?tab=repositories" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-1.5 text-xs text-zinc-500 transition hover:text-white">
             Explore all repositories
-
-            <ArrowUpRight
-              size={11}
-              className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            />
+            <ArrowUpRight size={11} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
         </div>
       </div>
