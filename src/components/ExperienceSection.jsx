@@ -4,7 +4,7 @@ import { ArrowUpRight, MapPin } from "lucide-react";
 const experiences = [
   {
     number: "01",
-    period: "Jan 2025 — Jun 2026",
+    period: "Jan 2025 — July 2026",
     duration: "1 year 6 months",
     location: "Bengaluru",
     role: "Full Stack Developer",
