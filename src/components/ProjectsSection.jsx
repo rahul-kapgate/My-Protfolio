@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 const projects = [
   {
     number: "01",
-    title: "ArtisticVickey.in",
+    title: "AV Art Academy",
     type: "Production EdTech Platform",
     status: "Live",
     image: "/artistic-vickey.png",
@@ -116,6 +116,47 @@ const projects = [
       {
         label: "View repository",
         href: "https://github.com/rahul-kapgate/smart-bookmark-app",
+      },
+    ],
+  },
+  {
+    number: "04",
+    title: "DSA Tracker",
+    type: "Interview Prep Progress Tracker",
+    status: "Live",
+    image: "/dsa-tracker.png",
+    description:
+      "A full-stack Next.js app for organizing DSA questions, tracking solve status, adding notes, and building consistent coding streaks for interview preparation.",
+    challenge:
+      "Give developers one place to collect problems from multiple sources, track readiness, and stay consistent without losing notes or progress.",
+    build:
+      "JWT auth with email verification, question organization and progress tracking, notes, streak tracking, and a secure dashboard on the Next.js App Router with MongoDB.",
+    outcome:
+      "A production interview-prep companion that keeps question organization, progress, notes and streaks in one authenticated experience.",
+    tech: [
+      "Next.js",
+      "App Router",
+      "TypeScript",
+      "Tailwind CSS",
+      "TanStack Query",
+      "MongoDB",
+      "Mongoose",
+      "JWT",
+      "Zustand",
+      "Zod",
+      "Resend",
+    ],
+    points: [
+      "Built authenticated flows with email verification, JWT access/refresh tokens and secure session handling.",
+      "Implemented question organization, solve-status tracking and personal notes for interview prep.",
+      "Added streak tracking to encourage consistent daily practice.",
+      "Used MongoDB models, TanStack Query and Zustand for data, caching and client state across the dashboard.",
+    ],
+    links: [
+      { label: "Visit live", href: "https://dsatracker.stackfromscratch.in/" },
+      {
+        label: "View repository",
+        href: "https://github.com/rahul-kapgate/dsa-tracker-next-js-app",
       },
     ],
   },
@@ -260,7 +301,7 @@ export default function ProjectsSection() {
                 <div>
                   <div className="mb-4 flex items-center justify-between">
                     <span className="font-mono text-[9px] text-zinc-700">
-                      {project.number} / 03
+                      {project.number} / 04
                     </span>
                     <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-zinc-600">
                       {project.status}
