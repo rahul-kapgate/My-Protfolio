@@ -10,33 +10,28 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const Hero = () => {
   const scrollToProjects = () => {
-    document
-      .getElementById("projects")
-      ?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <section className="min-h-screen bg-[#070b0f] text-[#d5d9df]">
-
       {/* ============================= */}
       {/* BANNER */}
       {/* ============================= */}
 
-      <div className="relative h-[315px] w-full overflow-hidden md:h-[365px]">
-
+      <div className="relative w-full h-[220px] sm:h-[280px] md:h-[320px] overflow-hidden bg-gradient-to-br from-[#0c1820] via-[#102430] to-[#090d11]">
         <img
-          src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=90"
-          alt="Mountain landscape"
-          className="h-full w-full object-cover"
+          src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1400&q=80"
+          alt="Cover Landscape"
+          className="absolute inset-0 w-full h-full object-cover opacity-60"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#090d11] via-[#090d11]/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#090d11]/40 via-transparent to-[#090d11]/40" />
 
-        {/* dark overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-[#070b0f]" />
-
-        {/* Quote */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <p className="px-6 text-center font-serif text-[15px] font-semibold italic text-white/90 sm:text-[17px]">
-            &quot;Giving up not in the blood sir, not in the blood&quot;
+        {/* Inspirational Subtitle Quote Overlay */}
+        <div className="absolute inset-0 flex items-center justify-center px-4 sm:px-8">
+          <p className="font-serif italic text-white/90 text-base sm:text-xl md:text-2xl tracking-wide leading-relaxed text-center max-w-3xl drop-shadow-md">
+            &quot; Giving up not in the blood sir, not in the blood&quot;
           </p>
         </div>
       </div>
@@ -46,25 +41,19 @@ const Hero = () => {
       {/* ============================= */}
 
       <div className="mx-auto max-w-[1060px] px-6 md:px-8">
-
         {/* PROFILE */}
         <div className="relative -mt-[62px] z-10">
-
           <div className="h-[116px] w-[116px] overflow-hidden rounded-full border-[4px] border-[#070b0f] bg-[#111820] shadow-lg md:h-[126px] md:w-[126px]">
-
             <img
               src="/rahul.png"
               alt="Rahul Kapgate"
               className="h-full w-full object-cover"
             />
-
           </div>
-
         </div>
 
         {/* INFO */}
         <div className="pb-24 pt-10">
-
           {/* NAME */}
 
           <h1 className="font-mono text-[34px] font-bold tracking-[-1px] text-[#f4f5f7] md:text-[42px]">
@@ -86,14 +75,13 @@ const Hero = () => {
           <p className="mt-6 max-w-[760px] font-mono text-[14px] leading-[1.75] text-[#c1c7cf] md:text-[16px]">
             Full Stack Developer focused on building scalable web applications
             using React, Next.js, Node.js, Python, PostgreSQL and cloud
-            technologies. Built production-ready full-stack applications,
-            REST APIs and modern responsive user interfaces.
+            technologies. Built production-ready full-stack applications, REST
+            APIs and modern responsive user interfaces.
           </p>
 
           {/* BUTTONS */}
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
-
             <button
               onClick={scrollToProjects}
               className="
@@ -116,7 +104,9 @@ const Hero = () => {
             </button>
 
             <a
-              href="mailto:YOUR_EMAIL@gmail.com"
+              href="/rahul-kapgate-resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="
                 flex
                 h-[52px]
@@ -136,21 +126,18 @@ const Hero = () => {
                 hover:bg-[#111820]
               "
             >
-              Contact Me
+              Resume
             </a>
-
           </div>
 
           {/* SOCIAL */}
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
-
             <span className="font-mono text-[12px] text-[#596676]">
               Find me on —
             </span>
 
             <div className="flex items-center gap-2">
-
               <SocialButton
                 href="https://github.com/rahul-kapgate"
                 icon={faGithub}
@@ -163,26 +150,17 @@ const Hero = () => {
                 label="LinkedIn"
               />
 
-              <SocialButton
-                href="YOUR_X_URL"
-                icon={faXTwitter}
-                label="X"
-              />
+              <SocialButton href="YOUR_X_URL" icon={faXTwitter} label="X" />
 
               <SocialButton
                 href="mailto:YOUR_EMAIL@gmail.com"
                 icon={faEnvelope}
                 label="Email"
               />
-
             </div>
-
           </div>
-
         </div>
-
       </div>
-
     </section>
   );
 };
