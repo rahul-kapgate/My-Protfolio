@@ -19,7 +19,7 @@ const Hero = () => {
       {/* BANNER */}
       {/* ============================= */}
 
-      <div className="relative w-full h-[220px] sm:h-[280px] md:h-[320px] overflow-hidden bg-gradient-to-br from-[#0c1820] via-[#102430] to-[#090d11]">
+      <div className="relative w-full h-[220px] sm:h-[280px] md:h-[280px] overflow-hidden bg-gradient-to-br from-[#0c1820] via-[#102430] to-[#090d11]">
         <img
           src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1400&q=80"
           alt="Cover Landscape"

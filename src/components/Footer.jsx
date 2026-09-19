@@ -29,15 +29,10 @@ const socialLinks = [
     icon: faXTwitter,
   },
   {
-    label: "LEETCODE",
-    href: "YOUR_LEETCODE_URL",
-    icon: faCode,
-  },
-  {
-    label: "MAIL",
-    href: "mailto:rahulkapgateyt@gmail.com",
+    label: "RESUME",
+    href: "/rahul-kapgate-resume.pdf",
     icon: faEnvelope,
-  },
+  }
 ];
 
 const Footer = () => {
