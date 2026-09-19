@@ -1,6 +1,6 @@
 import "./App.css";
 import "./assets/fonts/fonts.css";
-import Home from "./Pages/Home.jsx";
+import Home from "./pages/Home";
 import { HelmetProvider } from "react-helmet-async";
 
 function App() {
