@@ -145,15 +145,15 @@ const Hero = () => {
               />
 
               <SocialButton
-                href="YOUR_LINKEDIN_URL"
+                href="https://www.linkedin.com/in/rahul-kapgate"
                 icon={faLinkedinIn}
                 label="LinkedIn"
               />
 
-              <SocialButton href="YOUR_X_URL" icon={faXTwitter} label="X" />
+              <SocialButton href="https://www.x.com/rahul-kapgate" icon={faXTwitter} label="X" />
 
               <SocialButton
-                href="mailto:YOUR_EMAIL@gmail.com"
+                href="mailto:rahulkapgateyt@gmail.com"
                 icon={faEnvelope}
                 label="Email"
               />

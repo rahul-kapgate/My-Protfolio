@@ -25,7 +25,7 @@ const socialLinks = [
   },
   {
     label: "X",
-    href: "YOUR_X_URL",
+    href: "https://www.x.com/rahul-kapgate",
     icon: faXTwitter,
   },
   {
