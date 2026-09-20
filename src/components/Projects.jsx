@@ -230,32 +230,34 @@ const ProjectCard = ({ project }) => {
     >
       {/* PROJECT IMAGE */}
 
-      <div className="relative h-[235px] overflow-hidden bg-[#12191f]">
+      {/* PROJECT IMAGE */}
+      <div className="relative w-full overflow-hidden bg-[#0d141a] aspect-video">
         <img
           src={project.image}
-          alt={project.title}
+          alt={`${project.title} project preview`}
+          loading="lazy"
           className="
-            h-full
-            w-full
-            object-cover
-            object-top
-            transition
-            duration-500
-            group-hover:scale-[1.02]
-          "
+      h-full
+      w-full
+      object-contain
+      transition-transform
+      duration-500
+      group-hover:scale-[1.01]
+    "
         />
 
-        {/* same fade effect as screenshot */}
+        {/* subtle fade into card */}
         <div
           className="
-            pointer-events-none
-            absolute
-            inset-0
-            bg-gradient-to-b
-            from-transparent
-            via-transparent
-            to-[#0d141a]
-          "
+      pointer-events-none
+      absolute
+      inset-x-0
+      bottom-0
+      h-[35%]
+      bg-gradient-to-t
+      from-[#0d141a]
+      to-transparent
+    "
         />
       </div>
 
