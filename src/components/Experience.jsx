@@ -60,32 +60,60 @@ const experiences = [
     role: "Full Stack Developer, Intern",
     company: "Micropro Software Solutions Limited",
     description:
-      "Developed and enhanced web applications using JavaScript, React.js, Node.js, and Express.js across the software development lifecycle.",
+      "Worked primarily on backend development using Node.js, Express.js and MongoDB, while also supporting frontend integration with React.js.",
+
+    work: [
+      {
+        number: "01",
+        title: "Backend API Development",
+        description:
+          "Developed and maintained backend APIs using Node.js and Express.js, implementing request validation, business logic, and application workflows.",
+      },
+      {
+        number: "02",
+        title: "Database & Data Operations",
+        description:
+          "Worked with MongoDB queries, database operations, API integrations, and data handling for application modules.",
+      },
+      {
+        number: "03",
+        title: "API Testing & Debugging",
+        description:
+          "Debugged backend issues, tested API endpoints, and resolved application problems to improve reliability and integration.",
+      },
+      {
+        number: "04",
+        title: "Frontend Integration",
+        description:
+          "Built reusable React.js components and forms and integrated frontend interfaces with backend services.",
+      },
+    ],
+
+    metrics: [],
+  },
+
+  {
+    id: "03",
+    period: "Nov 2023 — Apr 2024",
+    duration: "6 months",
+    location: "Nagpur",
+    role: "Frontend Developer, Intern",
+    company: "Bliinc Innovations Pvt. Ltd.",
+    description:
+      "Worked on frontend development for web applications using React.js, JavaScript, HTML and CSS, focusing on responsive interfaces and reusable components.",
 
     work: [
       {
         number: "01",
         title: "Frontend Development",
         description:
-          "Built reusable UI components, forms, data tables, and responsive interfaces using React.js.",
+          "Developed responsive and reusable frontend components using React.js, JavaScript, HTML and CSS with a focus on clean and consistent user interfaces.",
       },
       {
         number: "02",
-        title: "Backend & Database",
+        title: "API Integration & UI Debugging",
         description:
-          "Worked with REST APIs and SQL databases for robust backend integration and data management.",
-      },
-      {
-        number: "03",
-        title: "Operations & Deployment",
-        description:
-          "Contributed to debugging, testing, Git/GitHub workflows, and application deployment.",
-      },
-      {
-        number: "04",
-        title: "Collaboration & Code Quality",
-        description:
-          "Collaborated with developers through Git/GitHub workflows, code reviews and issue resolution while following reusable and maintainable coding practices.",
+          "Integrated APIs, handled forms and validations, and contributed to UI debugging, testing and Git/GitHub workflows.",
       },
     ],
 

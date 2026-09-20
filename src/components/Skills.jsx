@@ -118,7 +118,7 @@ const skillGroups = [
     skills: [
       {
         name: "AWS",
-        icon: "https://cdn.simpleicons.org/amazonwebservices/FF9900",
+        icon: "/icons/aws.svg",
       },
       {
         name: "Docker",
