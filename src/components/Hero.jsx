@@ -8,145 +8,10 @@ import {
 
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
-const dailyQuotes = [
-  {
-    quote: "Keep moving forward, even when the path feels impossible.",
-    from: "Attack on Titan inspired",
-  },
-  {
-    quote: "Hard work can turn an ordinary person into someone extraordinary.",
-    from: "Naruto inspired",
-  },
-  {
-    quote: "Your limits today don't have to be your limits tomorrow.",
-    from: "Dragon Ball inspired",
-  },
-  {
-    quote: "A setback is only another reason to come back stronger.",
-    from: "One Piece inspired",
-  },
-  {
-    quote: "Fear disappears when you decide your goal matters more.",
-    from: "Demon Slayer inspired",
-  },
-  {
-    quote: "Talent helps, but discipline decides how far you go.",
-    from: "Blue Lock inspired",
-  },
-  {
-    quote: "You don't need to be fearless. You just need to keep going.",
-    from: "My Hero Academia inspired",
-  },
-  {
-    quote: "Small progress every day eventually becomes something huge.",
-    from: "Haikyuu!! inspired",
-  },
-  {
-    quote: "Become stronger than the version of you that existed yesterday.",
-    from: "Solo Leveling inspired",
-  },
-  {
-    quote: "The hardest battles often create the strongest people.",
-    from: "Vinland Saga inspired",
-  },
-
-  {
-    quote: "Dream bigger than your current circumstances.",
-    from: "One Piece inspired",
-  },
-  {
-    quote: "Your past explains you, but it doesn't have to define you.",
-    from: "Naruto inspired",
-  },
-  {
-    quote: "There is always another level if you're willing to work for it.",
-    from: "Dragon Ball inspired",
-  },
-  {
-    quote: "When everything feels against you, keep walking anyway.",
-    from: "Attack on Titan inspired",
-  },
-  {
-    quote: "Strength means getting back up one more time.",
-    from: "Demon Slayer inspired",
-  },
-  {
-    quote: "Stop waiting to feel ready. Start becoming ready.",
-    from: "Blue Lock inspired",
-  },
-  {
-    quote: "A real hero keeps going when nobody is watching.",
-    from: "My Hero Academia inspired",
-  },
-  {
-    quote: "You don't become great overnight. You build it point by point.",
-    from: "Haikyuu!! inspired",
-  },
-  {
-    quote: "If the challenge gets stronger, so should you.",
-    from: "Solo Leveling inspired",
-  },
-  {
-    quote: "Winning against yourself is the most important victory.",
-    from: "Rocky inspired",
-  },
-
-  {
-    quote: "Why fall? So you can learn how to rise again.",
-    from: "Batman Begins inspired",
-  },
-  {
-    quote: "What you do today shapes who you become tomorrow.",
-    from: "Batman inspired",
-  },
-  {
-    quote: "Keep fighting for the person you know you can become.",
-    from: "Creed inspired",
-  },
-  {
-    quote: "Pressure doesn't decide your future. Your response does.",
-    from: "The Pursuit of Happyness inspired",
-  },
-  {
-    quote: "Great things often begin when someone refuses to quit.",
-    from: "Interstellar inspired",
-  },
-  {
-    quote: "You can lose a battle without losing your purpose.",
-    from: "Avengers inspired",
-  },
-  {
-    quote: "There is no perfect moment. There is only the decision to begin.",
-    from: "Spider-Man inspired",
-  },
-  {
-    quote:
-      "Sometimes the impossible only needs someone stubborn enough to try.",
-    from: "Iron Man inspired",
-  },
-  {
-    quote:
-      "Your biggest competition should always be yesterday's version of you.",
-    from: "Anime inspired",
-  },
-  {
-    quote: "Stay hungry enough to learn and patient enough to improve.",
-    from: "Shonen anime inspired",
-  },
-  {
-    quote: "Giving up isn't part of the plan. Adapt, improve, continue.",
-    from: "Anime inspired",
-  },
-];
-
 const Hero = () => {
   const scrollToProjects = () => {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
   };
-
-  const today = new Date().getDate();
-
-  const dailyQuote = dailyQuotes[today - 1];
 
   return (
     <section className="min-h-screen bg-[#070b0f] text-[#d5d9df]">
@@ -165,15 +30,9 @@ const Hero = () => {
 
         {/* Inspirational Subtitle Quote Overlay */}
         <div className="absolute inset-0 flex items-center justify-center px-4 sm:px-8">
-          <div className="text-center max-w-3xl">
-            <p className="font-serif italic text-white/90 text-base sm:text-xl md:text-2xl tracking-wide leading-relaxed drop-shadow-md">
-              &quot;{dailyQuote.quote}&quot;
-            </p>
-
-            <p className="mt-3 font-mono text-[10px] sm:text-xs tracking-[0.18em] uppercase text-white/40">
-              {dailyQuote.from}
-            </p>
-          </div>
+          <p className="font-serif italic text-white/90 text-base sm:text-xl md:text-2xl tracking-wide leading-relaxed text-center max-w-3xl drop-shadow-md">
+            &quot; Giving up not in the blood sir, not in the blood&quot;
+          </p>
         </div>
       </div>
 
@@ -291,11 +150,7 @@ const Hero = () => {
                 label="LinkedIn"
               />
 
-              <SocialButton
-                href="https://www.x.com/rahul-kapgate"
-                icon={faXTwitter}
-                label="X"
-              />
+              <SocialButton href="https://www.x.com/rahul-kapgate" icon={faXTwitter} label="X" />
 
               <SocialButton
                 href="mailto:rahulkapgateyt@gmail.com"
