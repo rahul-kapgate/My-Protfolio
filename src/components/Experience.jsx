@@ -1,7 +1,7 @@
 const experiences = [
   {
     id: "01",
-    period: "Jan 2025 — July 2026",
+    period: "Jan 2025 — June 2026",
     duration: "1 year 6 months",
     location: "Bengaluru",
     role: "Full Stack Developer",
