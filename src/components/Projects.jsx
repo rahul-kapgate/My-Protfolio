@@ -31,9 +31,16 @@ const projects = [
       "Razorpay",
     ],
 
-    github: "https://github.com/rahul-kapgate/artisticvicky-v2-backend",
-
-    frontend: "https://github.com/rahul-kapgate/artisticvicky-v2-frontend",
+    repos: [
+      {
+        label: "Frontend",
+        url: "https://github.com/rahul-kapgate/artisticvicky-v2-frontend",
+      },
+      {
+        label: "Backend",
+        url: "https://github.com/rahul-kapgate/artisticvicky-v2-backend",
+      },
+    ],
 
     live: "https://artisticvickey.in/",
   },
@@ -64,7 +71,12 @@ const projects = [
       "Resend",
     ],
 
-    github: "https://github.com/rahul-kapgate/dsa-tracker-next-js-app",
+    repos: [
+      {
+        label: "GitHub",
+        url: "https://github.com/rahul-kapgate/dsa-tracker-next-js-app",
+      },
+    ],
 
     live: "https://dsatracker.stackfromscratch.in/",
   },
@@ -93,7 +105,12 @@ const projects = [
       "Stripe",
     ],
 
-    github: "https://github.com/rahul-kapgate/digital-heroes-golf-app",
+    repos: [
+      {
+        label: "GitHub",
+        url: "https://github.com/rahul-kapgate/digital-heroes-golf-app",
+      },
+    ],
 
     live: "",
   },
@@ -120,7 +137,50 @@ const projects = [
       "Realtime",
     ],
 
-    github: "https://github.com/rahul-kapgate/smart-bookmark-app",
+    repos: [
+      {
+        label: "GitHub",
+        url: "https://github.com/rahul-kapgate/smart-bookmark-app",
+      },
+    ],
+
+    live: "",
+  },
+  {
+    id: 5,
+    title: "Stylework Lead Tracker",
+    subtitle: "Production Lead Management Platform",
+    featured: true,
+
+    image: "/stylework-lead-tracker.png",
+
+    description:
+      "A full-stack lead management platform with server-side search, pagination, bulk actions, status tracking and a production-ready AWS deployment with automated CI/CD.",
+
+    technologies: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "MUI",
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "Supabase",
+      "Zod",
+      "Jest",
+      "Docker",
+      "AWS EC2",
+      "GitHub Actions",
+      "CI/CD ",
+      "Test Automation",
+    ],
+
+    repos: [
+      {
+        label: "GitHub",
+        url: "https://github.com/rahul-kapgate/stylework-lead-tracker",
+      },
+    ],
 
     live: "",
   },
@@ -287,18 +347,31 @@ const ProjectCard = ({ project }) => {
             )}
           </div>
 
-          <div className="flex items-center gap-4">
-            {project.github && (
+          <div className="flex items-center gap-3">
+            {project.repos?.map((repo) => (
               <a
-                href={project.github}
+                key={repo.url}
+                href={repo.url}
                 target="_blank"
                 rel="noreferrer"
-                aria-label={`${project.title} GitHub`}
-                className="text-[#758697] transition hover:text-[#c6d0d8]"
+                aria-label={`${project.title} ${repo.label} repository`}
+                title={`${repo.label} Repository`}
+                className="
+        flex
+        items-center
+        gap-1.5
+        font-mono
+        text-[10px]
+        text-[#758697]
+        transition
+        hover:text-[#c6d0d8]
+      "
               >
                 <FontAwesomeIcon icon={faGithub} className="text-[17px]" />
+
+                <span className="hidden sm:inline">{repo.label}</span>
               </a>
-            )}
+            ))}
 
             {project.live && (
               <a
@@ -306,12 +379,24 @@ const ProjectCard = ({ project }) => {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={`Open ${project.title}`}
-                className="text-[#758697] transition hover:text-[#c6d0d8]"
+                title="Live Website"
+                className="
+      flex
+      items-center
+      gap-1.5
+      font-mono
+      text-[10px]
+      text-[#758697]
+      transition
+      hover:text-[#c6d0d8]
+    "
               >
                 <FontAwesomeIcon
                   icon={faArrowUpRightFromSquare}
                   className="text-[14px]"
                 />
+
+                <span>Live</span>
               </a>
             )}
           </div>
