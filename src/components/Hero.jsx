@@ -8,9 +8,25 @@ import {
 
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
+import { SiLeetcode } from "react-icons/si";
+
+import { useState } from "react";
+
 const Hero = () => {
   const scrollToProjects = () => {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = async () => {
+    await navigator.clipboard.writeText("rahulkapgateyt@gmail.com");
+
+    setCopied(true);
+
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
   };
 
   return (
@@ -150,13 +166,74 @@ const Hero = () => {
                 label="LinkedIn"
               />
 
-              <SocialButton href="https://www.x.com/rahul-kapgate" icon={faXTwitter} label="X" />
-
               <SocialButton
-                href="mailto:rahulkapgateyt@gmail.com"
-                icon={faEnvelope}
-                label="Email"
+                href="https://www.x.com/rahul__kapgate"
+                icon={faXTwitter}
+                label="X"
               />
+
+              <a
+                href="https://leetcode.com/u/rahul__kapgate"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LeetCode"
+                title="LeetCode"
+                className="
+        flex
+        h-[39px]
+        w-[39px]
+        items-center
+        justify-center
+        rounded-[9px]
+        border
+        border-[#202933]
+        bg-[#0b1116]
+        text-[17px]
+        text-[#5f6f81]
+        transition
+        duration-200
+        hover:border-[#34414d]
+        hover:bg-[#111820]
+        hover:text-[#9eabb9]
+      "
+              >
+                <SiLeetcode />
+              </a>
+
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={copyEmail}
+                  aria-label="Copy email"
+                  title="Copy email"
+                  className="
+      flex
+      h-[39px]
+      w-[39px]
+      items-center
+      justify-center
+      rounded-[9px]
+      border
+      border-[#202933]
+      bg-[#0b1116]
+      text-[15px]
+      text-[#5f6f81]
+      transition
+      duration-200
+      hover:border-[#34414d]
+      hover:bg-[#111820]
+      hover:text-[#9eabb9]
+    "
+                >
+                  <FontAwesomeIcon icon={faEnvelope} />
+                </button>
+
+                {copied && (
+                  <span className="absolute left-1/2 top-[48px] -translate-x-1/2 whitespace-nowrap rounded-md border border-[#202933] bg-[#0d1217] px-3 py-1.5 font-mono text-[11px] text-[#c1c7cf]">
+                    Email copied!
+                  </span>
+                )}
+              </div>
             </div>
           </div>
         </div>
